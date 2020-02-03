@@ -24,7 +24,13 @@ public final class Constants {
         public static final int finalConveyorSensor = 1;
         public static final int launcherConveyorSensor = 2;
         public static final double conveyorMotorAdvanceSpeed = 0.7;
+        public static final double conveyorMotorRetreatSpeed = -0.7;
+        public static final double conveyorMotorStopSpeed = 0.0;
 
+    }
+
+    public static final class OIConstants {
+        public static final int stickPort = 0;
     }
 
 }

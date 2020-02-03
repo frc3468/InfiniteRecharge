@@ -33,9 +33,27 @@ public class Conveyor extends SubsystemBase {
   }
 
   public void Advance() {
-
     conveyorMotor.set(ControlMode.PercentOutput, ConveyorConstants.conveyorMotorAdvanceSpeed);
+  }
 
+  public void Retreat() {
+    conveyorMotor.set(ControlMode.PercentOutput, ConveyorConstants.conveyorMotorRetreatSpeed);
+  }
+
+  public void Stop() {
+    conveyorMotor.set(ControlMode.PercentOutput, ConveyorConstants.conveyorMotorStopSpeed);
+  }
+
+  public boolean InitialConveyorSensorGet() {
+    return initialConveyorSensor.get();
+  }
+
+  public boolean FinalConveyorSensorGet() {
+    return finalConveyorSensor.get();
+  }
+
+  public boolean LauncherConveyorSensorGet() {
+    return launcherConveyorSensor.get();
   }
 
   @Override
