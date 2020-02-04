@@ -17,9 +17,12 @@ public class Launcher extends SubsystemBase {
   private TalonSRX leftLaunchMotor;
 
   public Launcher() {
-
     rightLaunchMotor = new TalonSRX(LauncherConstants.rightLaunchMotor);
     leftLaunchMotor = new TalonSRX(LauncherConstants.leftLaunchMotor);
+  }
+
+  public void Launch() {
+
   }
 
   @Override

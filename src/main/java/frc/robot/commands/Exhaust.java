@@ -8,13 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.BallIntake;
 
-public class Launch extends CommandBase {
+public class Exhaust extends CommandBase {
+  private BallIntake ballIntake;
   /**
-   * Creates a new Launch.
+   * Creates a new Exhaust.
    */
-  public Launch() {
-    
+  public Exhaust(BallIntake subsystem) {
+    ballIntake = subsystem;
+    addRequirements(ballIntake);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -26,7 +29,7 @@ public class Launch extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    ballIntake.Exhast();
   }
 
   // Called once the command ends or is interrupted.

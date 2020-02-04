@@ -13,9 +13,10 @@ import frc.robot.subsystems.BallIntake;
 public class Intake extends CommandBase {
   private BallIntake ballIntake;
 
-  /**
+  /* 
    * Creates a new Intake.
    */
+  
   public Intake(BallIntake subsystem) {
     ballIntake = subsystem;
     addRequirements(ballIntake);

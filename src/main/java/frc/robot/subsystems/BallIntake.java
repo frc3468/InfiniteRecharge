@@ -9,13 +9,11 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
 
 public class BallIntake extends SubsystemBase {
-  /**
+  /*
    * Creates a new BallIntake.
    */
   public TalonSRX IntakeMotor;
@@ -26,6 +24,10 @@ public class BallIntake extends SubsystemBase {
   public void Intake() {
     IntakeMotor.set(ControlMode.PercentOutput, IntakeConstants.BallIntakePercentOutput);
   }
+  public void Exhast() {
+    IntakeMotor.set(ControlMode.PercentOutput, IntakeConstants.BallExhaustPercentOutput);
+  }
+
   @Override
   public void periodic() {
     

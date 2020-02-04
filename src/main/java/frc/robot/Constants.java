@@ -20,6 +20,15 @@ public final class Constants {
     public static final class IntakeConstants {
         public static final int IntakeMotor = 0;
         public static final double BallIntakePercentOutput = 0.5;
+        public static final double BallExhaustPercentOutput = -0.5;
+    }
+    public static final class LauncherConstants {
+        public static final int rightLaunchMotor = 1;
+        public static final int leftLaunchMotor = 2;
+    }
+    public static final class ConveyorConstants {
+        public static final int ConveyorMotor = 3; 
+        public static final double ConveyorMotorPercentOutput = 0.4;
     }
 
 }
