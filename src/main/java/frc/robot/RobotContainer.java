@@ -11,11 +11,15 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.Advance;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Retreat;
+import frc.robot.commands.Stop;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -49,10 +53,13 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     new JoystickButton(stick, Button.kA.value).and(
-      new edu.wpi.first.wpilibj2.command.button.Button(() -> conveyor.InitialConveyorSensorGet()).or(
-    new Button(() -> conveyor.FinalConveyorSensorGet()).or(
-    
-    ))
+    new Trigger(() -> conveyor.InitialConveyorSensorGet()).or(
+    new Trigger(() -> conveyor.FinalConveyorSensorGet()).or(
+    new Trigger(() -> conveyor.LauncherConveyorSensorGet()).negate()
+    ).whileActiveContinuous(new Advance(conveyor)
+    ).whenInactive(new Stop(conveyor))));
+
+    new JoystickButton(stick, Button.kBumperRight.value).whileHeld(new Retreat(conveyor));
   }
 
 
