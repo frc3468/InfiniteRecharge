@@ -26,9 +26,5 @@ public final class Constants {
         public static final int rightLaunchMotor = 1;
         public static final int leftLaunchMotor = 2;
     }
-    public static final class ConveyorConstants {
-        public static final int ConveyorMotor = 3; 
-        public static final double ConveyorMotorPercentOutput = 0.4;
-    }
 
 }
