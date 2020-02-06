@@ -7,14 +7,13 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.Advance;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Intake;
 import frc.robot.commands.Retreat;
-import frc.robot.commands.Stop;
+import frc.robot.commands.StopConveyor;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.BallIntake;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -42,7 +41,9 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the button bindings
+
     configureButtonBindings();
+
   }
 
   /*
@@ -52,14 +53,24 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(stick, Button.kA.value).and(
-    new Trigger(() -> conveyor.InitialConveyorSensorGet()).or(
-    new Trigger(() -> conveyor.FinalConveyorSensorGet()).or(
-    new Trigger(() -> conveyor.LauncherConveyorSensorGet()).negate()
-    ).whileActiveContinuous(new Advance(conveyor)
-    ).whenInactive(new Stop(conveyor))));
+    JoystickButton intakeButton = new JoystickButton(stick, OIConstants.intakeButtonNum);
+    
+    Trigger initialConveyorDetector = new Trigger(() -> conveyor.InitialConveyorSensorGet());
+    Trigger finalConveyorDetector = new Trigger(() -> conveyor.FinalConveyorSensorGet());
+    Trigger launcherConveyorDetector = new Trigger(() -> conveyor.LauncherConveyorSensorGet());
 
-    new JoystickButton(stick, Button.kBumperRight.value).whileHeld(new Retreat(conveyor));
+    // Intake
+    intakeButton.and(
+      finalConveyorDetector.or(launcherConveyorDetector).negate()
+    ).whileActiveContinuous(new Intake(ballIntake));
+    
+    // Conveyor
+    intakeButton.and(
+      initialConveyorDetector.or(finalConveyorDetector)
+      .and(launcherConveyorDetector.negate())
+    )
+    .whileActiveContinuous(new Advance(conveyor));
+
   }
 
 

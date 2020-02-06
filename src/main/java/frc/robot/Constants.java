@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.XboxController;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -32,6 +33,8 @@ public final class Constants {
 
     public static final class OIConstants {
         public static final int stickPort = 0;
+
+        public static final int intakeButtonNum = XboxController.Button.kA.value;
     }
    
     public static final class IntakeConstants {
@@ -39,7 +42,7 @@ public final class Constants {
         public static final double BallIntakePercentOutput = 0.5;
         public static final double BallExhaustPercentOutput = -0.5;
     }
-    
+
     public static final class LauncherConstants {
         public static final int rightLaunchMotor = 1;
         public static final int leftLaunchMotor = 2;

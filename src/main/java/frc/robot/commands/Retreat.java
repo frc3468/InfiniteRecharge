@@ -29,12 +29,13 @@ public class Retreat extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    conveyor.Retreat();
+    conveyor.retreat();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    conveyor.stop();
   }
 
   // Returns true when the command should end.

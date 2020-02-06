@@ -10,25 +10,26 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Conveyor;
 
-public class Stop extends CommandBase {
+public class StopConveyor extends CommandBase {
   private final Conveyor conveyor;
   /**
    * Creates a new Stop.
    */
-  public Stop(Conveyor subsystem) {
+  public StopConveyor(Conveyor subsystem) {
     conveyor = subsystem;
+    addRequirements(conveyor);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    conveyor.stop();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    conveyor.Stop();
   }
 
   // Called once the command ends or is interrupted.
@@ -39,6 +40,6 @@ public class Stop extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

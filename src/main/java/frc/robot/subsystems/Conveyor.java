@@ -32,15 +32,15 @@ public class Conveyor extends SubsystemBase {
 
   }
 
-  public void Advance() {
+  public void advance() {
     conveyorMotor.set(ControlMode.PercentOutput, ConveyorConstants.conveyorMotorAdvanceSpeed);
   }
 
-  public void Retreat() {
+  public void retreat() {
     conveyorMotor.set(ControlMode.PercentOutput, ConveyorConstants.conveyorMotorRetreatSpeed);
   }
 
-  public void Stop() {
+  public void stop() {
     conveyorMotor.set(ControlMode.PercentOutput, ConveyorConstants.conveyorMotorStopSpeed);
   }
 
