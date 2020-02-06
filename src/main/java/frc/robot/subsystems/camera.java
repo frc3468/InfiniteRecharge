@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Camera extends SubsystemBase {
   
+  // This was gathered by mesuring the distance from the camera from the goal then realizing x*area=distance in which x is the total or the conversion rate
   double conversionrate = 36.5740;    
   NetworkTableInstance table; 
   NetworkTable cameraTable; 
@@ -29,8 +30,10 @@ public class Camera extends SubsystemBase {
    * Creates a new ExampleSubsystem.
    */
   public Camera() {
-    cameraTable = NetworkTableInstance.getTable("chameleon-vision").getSubTable("mycamname");
-    table = NetworkTableInstance.getDefault();
+    
+    NetworkTableInstance table = NetworkTableInstance.getDefault();
+    NetworkTable cameraTable = NetworkTableInstance.getTable("chameleon-vision").getSubTable("mycamname");
+    
     area = cameraTable.getEntery(targetArea);
   };
 
@@ -41,8 +44,7 @@ public class Camera extends SubsystemBase {
     };
   
   public double distance(){
-    
-    return double area * conversionrate;
+    return area * conversionrate;
   };
 
 };
