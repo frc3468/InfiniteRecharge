@@ -16,36 +16,36 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Retreat;
 import frc.robot.commands.Stop;
 import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.BallIntake;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
- * This class is where the bulk of the robot should be declared.  Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
- * (including subsystems, commands, and button mappings) should be declared here.
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a "declarative" paradigm, very little robot logic should
+ * actually be handled in the {@link Robot} periodic methods (other than the
+ * scheduler calls). Instead, the structure of the robot (including subsystems,
+ * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Conveyor conveyor = new Conveyor();
-
+  private final BallIntake ballIntake = new BallIntake();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   XboxController stick = new XboxController(OIConstants.stickPort);
 
-
-
-  /**
-   * The container for the robot.  Contains subsystems, OI devices, and commands.
+  /*
+   * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
   }
 
-  /**
+  /*
    * Use this method to define your button->command mappings.  Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
