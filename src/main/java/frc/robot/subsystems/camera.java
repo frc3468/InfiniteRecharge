@@ -24,6 +24,7 @@ public class Camera extends SubsystemBase {
   NetworkTableInstance table; 
   NetworkTable cameraTable; 
   NetworkTableEntry area;
+  NetworkTableEntry yaw;
   //Replace mycamname with the name of the camera once we get that set up  
 
   /**
@@ -44,7 +45,8 @@ public class Camera extends SubsystemBase {
     };
   
   public double distance(){
-    return area * conversionrate;
+    //backup code its outdated.
+    return area.getdouble(0.0) * conversionrate;
   };
 
 };
