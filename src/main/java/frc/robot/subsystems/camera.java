@@ -46,10 +46,10 @@ public class Camera extends SubsystemBase {
     
     area = cameraTable.getEntery(targetArea); 
     solvepnp = cameraTable.getEntery(targetPose);
-    array = Array.getoff(solvepnp.getdouble())
-    x = array[1]
-    y = array[2]
-    angle = array[3]
+    array = Array.getoff(solvepnp.getdouble());
+    x = array[1];
+    y = array[2];
+    angle = array[3];
     pitch = cameraTable.getEntry(targetPitch);
     yaw = cameraTable.getEntery(targetYaw);
     valid = cameraTable.getEntery(isValid);
@@ -73,7 +73,7 @@ public class Camera extends SubsystemBase {
 
   public double yOffset(){
 
-    return abs(yaw.getdouble)
+    return abs(yaw.getdouble);
   };
 
   public boolean isvalid(){
