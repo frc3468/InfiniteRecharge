@@ -31,8 +31,9 @@ public class Camera extends SubsystemBase {
   double x;
   double y;
   double angle; 
-  double pitch; 
-  double yaw;
+  NetworkTableEntry pitch; 
+  NetworkTableEntry yaw;
+  NetworkTableEntry valid;
   //Replace mycamname with the name of the camera once we get that set up  
 
   /**
@@ -51,6 +52,7 @@ public class Camera extends SubsystemBase {
     angle = array[3]
     pitch = cameraTable.getEntry(targetPitch);
     yaw = cameraTable.getEntery(targetYaw);
+    valid = cameraTable.getEntery(isValid);
   };
 
   @Override
@@ -72,7 +74,11 @@ public class Camera extends SubsystemBase {
   public double yOffset(){
 
     return abs(yaw.getdouble)
-  }
+  };
+
+  public boolean isvalid(){
+    return valid.getboolean; 
+  };
 }; 
 
 
