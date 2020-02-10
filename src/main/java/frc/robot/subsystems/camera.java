@@ -28,9 +28,11 @@ public class Camera extends SubsystemBase {
   NetworkTableEntry solvepnp;
   
   double array[]
-  double x
-  double y
-  double angle
+  double x;
+  double y;
+  double angle; 
+  double pitch; 
+  double yaw;
   //Replace mycamname with the name of the camera once we get that set up  
 
   /**
@@ -47,6 +49,8 @@ public class Camera extends SubsystemBase {
     x = array[1]
     y = array[2]
     angle = array[3]
+    pitch = cameraTable.getEntry(targetPitch);
+    yaw = cameraTable.getEntery(targetYaw);
   };
 
   @Override
@@ -60,18 +64,15 @@ public class Camera extends SubsystemBase {
     return area.getdouble(0.0) * conversionrate;
   };
   */
-  public double xOffset(){
-    return abs(x) 
 
-  }
+  public double xOffset(){
+    return abs(pitch.getdouble);
+  };
 
   public double yOffset(){
-    return abs(y)
 
+    return abs(yaw.getdouble)
   }
-
-
-
 }; 
 
 
