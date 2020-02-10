@@ -46,6 +46,14 @@ public final class Constants {
     public static final class LauncherConstants {
         public static final int rightLaunchMotor = 1;
         public static final int leftLaunchMotor = 2;
+        public static final double rightLaunchMotorVelocity = 0.8;
+        public static final double leftLaunchMotorVelocity = -0.8;
+        public static final double rightLaunchMotorSpeed = 0.6;
+        public static final double leftLaunchMotorSpeed = -0.6;
+        public static final double rightLaunchStopSpeed = 0.0;
+        public static final double leftLaunchStopSpeed = 0.0;
+        public static final int launchVelocity = 90; 
+
     }
 
 }

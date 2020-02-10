@@ -7,22 +7,42 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.LauncherConstants;
 
 public class Launcher extends SubsystemBase {
 
   private TalonSRX rightLaunchMotor;
-  private TalonSRX leftLaunchMotor;
+  private TalonSRX leftLaunchMotor; 
 
   public Launcher() {
     rightLaunchMotor = new TalonSRX(LauncherConstants.rightLaunchMotor);
     leftLaunchMotor = new TalonSRX(LauncherConstants.leftLaunchMotor);
   }
 
-  public void Launch() {
+  public void setVelocity() {
+    rightLaunchMotor.set(ControlMode.PercentOutput, LauncherConstants.rightLaunchMotorVelocity);
+    leftLaunchMotor.set(ControlMode.PercentOutput, LauncherConstants.leftLaunchMotorVelocity);
+  }
 
+  public void setSpeed() {
+    rightLaunchMotor.set(ControlMode.PercentOutput, LauncherConstants.rightLaunchMotorSpeed);
+    leftLaunchMotor.set(ControlMode.PercentOutput, LauncherConstants.leftLaunchMotorSpeed);
+  }
+
+  public void stop() {
+    rightLaunchMotor.set(ControlMode.PercentOutput, LauncherConstants.rightLaunchStopSpeed);
+    leftLaunchMotor.set(ControlMode.PercentOutput, LauncherConstants.leftLaunchStopSpeed);
+  }
+
+  public double getVelocity() {
+    leftLaunchMotor.follow(rightLaunchMotor, FollowerType.AuxOutput1);
   }
 
   @Override
