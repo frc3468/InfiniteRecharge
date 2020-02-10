@@ -24,7 +24,13 @@ public class Camera extends SubsystemBase {
   NetworkTableInstance table; 
   NetworkTable cameraTable; 
   NetworkTableEntry area;
-  NetworkTableEntry yaw;
+  
+  NetworkTableEntry solvepnp;
+  
+  double array[]
+  double x
+  double y
+  double angle
   //Replace mycamname with the name of the camera once we get that set up  
 
   /**
@@ -35,7 +41,12 @@ public class Camera extends SubsystemBase {
     NetworkTableInstance table = NetworkTableInstance.getDefault();
     NetworkTable cameraTable = NetworkTableInstance.getTable("chameleon-vision").getSubTable("mycamname");
     
-    area = cameraTable.getEntery(targetArea);
+    area = cameraTable.getEntery(targetArea); 
+    solvepnp = cameraTable.getEntery(targetPose);
+    array = Array.getoff(solvepnp.getdouble())
+    x = array[1]
+    y = array[2]
+    angle = array[3]
   };
 
   @Override
@@ -44,9 +55,23 @@ public class Camera extends SubsystemBase {
     
     };
   
-  public double distance(){
+  /*public double distance(){
     //backup code its outdated.
     return area.getdouble(0.0) * conversionrate;
   };
+  */
+  public double xOffset(){
+    return abs(x) 
 
-};
+  }
+
+  public double yOffset(){
+    return abs(y)
+
+  }
+
+
+
+}; 
+
+
