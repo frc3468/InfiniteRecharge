@@ -21,11 +21,17 @@ public class BallIntake extends SubsystemBase {
   public BallIntake() {
     IntakeMotor = new TalonSRX(IntakeConstants.IntakeMotor);
   }
+
   public void Intake() {
     IntakeMotor.set(ControlMode.PercentOutput, IntakeConstants.BallIntakePercentOutput);
   }
+
   public void Exhast() {
     IntakeMotor.set(ControlMode.PercentOutput, IntakeConstants.BallExhaustPercentOutput);
+  }
+  
+  public void Stop() {
+    IntakeMotor.set(ControlMode.PercentOutput, IntakeConstants.BallIntakestop);
   }
 
   @Override
