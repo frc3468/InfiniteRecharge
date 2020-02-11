@@ -68,6 +68,20 @@ public class Camera extends SubsystemBase {
   */
 
   public double xOffset(){
+    // in this case negative numbers would be left and posotive would be right 
+    // an example in psuedo code would be 
+    /* 
+    if(xOffset < 0){ 
+    bool left = true
+    };
+    elseif(xOffset > 0){
+    bool right = true
+    };
+    else(){
+    bool onTarget = true
+    };
+    */
+    
     return abs(pitch.getdouble);
   };
 
