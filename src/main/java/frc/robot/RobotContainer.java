@@ -33,6 +33,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Conveyor conveyor = new Conveyor();
   private final BallIntake ballIntake = new BallIntake();
+  private final Camera camera = new Camera();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   XboxController stick = new XboxController(OIConstants.stickPort);
 
