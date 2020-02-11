@@ -55,5 +55,9 @@ public final class Constants {
         public static final int launchVelocity = 90; 
 
     }
+    public static final class CameraConstants {
+        public static final NetworkTableInstance Networktable = NetworkTableInstance.getDefault();
+
+    }
 
 }
