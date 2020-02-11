@@ -8,9 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
-/**
+
+/*
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
  * declared globally (i.e. public static).  Do not put anything functional in this class.
@@ -57,10 +56,8 @@ public final class Constants {
 
     }
     public static final class CameraConstants {
-        public static final NetworkTableInstance Networktable = NetworkTableInstance.getDefault();
-        public final NetworkTable cameraTable = NetworkTableInstance.getTable("chameleon-vision").getSubTable("mycamname");
-        // double conversionrate = 36.5740;
-        // got conversion rate from the equation 0.19x=79in
+        public static final String cameraTableName = "camera_name";
+
     }
 
 }

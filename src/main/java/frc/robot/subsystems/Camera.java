@@ -11,6 +11,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.CameraConstants;
 
 
 
@@ -22,7 +23,7 @@ public class Camera extends SubsystemBase {
   // This was gathered by mesuring the distance from the camera from the goal then realizing x*area=distance in which x is the total or the conversion rate
      
    
-  NetworkTable cameraTable; 
+  NetworkTableInstance table;
   NetworkTableEntry area;
   
   NetworkTableEntry solvepnp;
@@ -42,9 +43,8 @@ public class Camera extends SubsystemBase {
    * Creates a new ExampleSubsystem.
    */
   public Camera() {
-    
-    
-    
+    NetworkTableInstance table = NetworkTableInstance.getDefault();    
+    NetworkTable cameraTable = NetworkTableInstance.getTable(CameraConstants.chameleonName).getSubTable(CameraConstants.cameraTableName);
     area = cameraTable.getEntery(targetArea); 
     solvepnp = cameraTable.getEntery(targetPose);
     spnpArray = Array.getoff(solvepnp.getdouble());
