@@ -8,7 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -33,7 +34,6 @@ public final class Constants {
 
     public static final class OIConstants {
         public static final int stickPort = 0;
-
         public static final int intakeButtonNum = XboxController.Button.kA.value;
     }
    
@@ -41,6 +41,7 @@ public final class Constants {
         public static final int IntakeMotor = 0;
         public static final double BallIntakePercentOutput = 0.5;
         public static final double BallExhaustPercentOutput = -0.5;
+        public static final double BallIntakestop = 0.0;
     }
 
     public static final class LauncherConstants {
@@ -57,7 +58,9 @@ public final class Constants {
     }
     public static final class CameraConstants {
         public static final NetworkTableInstance Networktable = NetworkTableInstance.getDefault();
-
+        public final NetworkTable cameraTable = NetworkTableInstance.getTable("chameleon-vision").getSubTable("mycamname");
+        // double conversionrate = 36.5740;
+        // got conversion rate from the equation 0.19x=79in
     }
 
 }
