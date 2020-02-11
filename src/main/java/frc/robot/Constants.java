@@ -56,7 +56,7 @@ public final class Constants {
 
     }
     public static final class CameraConstants {
-        public static final NetworkTableInstance Networktable = NetworkTableInstance.getDefault();
+        public static final String cameraTableName = "camera_name";
 
     }
 
