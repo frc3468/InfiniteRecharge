@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.PWMSpeedController;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DrivetrainConstants;
+import frc.robot.commands.CartesianDrive;
 
 public class Drivetrain extends SubsystemBase {
   private CANSparkMax frontLeftDriveMotor;
@@ -35,6 +36,10 @@ public class Drivetrain extends SubsystemBase {
     rearRightDriveMotor = new CANSparkMax(DrivetrainConstants.rearRightDriveMotor, MotorType.kBrushless);
     //
     robotDrive = new MecanumDrive(frontLeftDriveMotor, rearLeftDriveMotor, frontRightDriveMotor, rearRightDriveMotor);
+  }
+
+  public void cartesianDrive(double magnitudey, double magnitudex, double rotation) {
+    robotDrive.driveCartesian(magnitudey, magnitudex, rotation);
   }
 
   @Override

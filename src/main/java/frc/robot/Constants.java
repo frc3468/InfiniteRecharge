@@ -22,4 +22,8 @@ public final class Constants {
         public static final int frontRightDriveMotor = 2;
         public static final int rearRightDriveMotor = 3;
     }
+
+    public static final class OIConstants {
+        public static final int mainStickPort = 0;
+    }
 }
