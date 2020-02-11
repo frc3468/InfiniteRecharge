@@ -27,8 +27,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Drivetrain drivetrain = new Drivetrain();
-
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);\
+  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   XboxController mainStick = new XboxController(OIConstants.mainStickPort);
 
 
@@ -42,9 +41,9 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(
       new CartesianDrive(
         drivetrain,
-        () -> mainStick.gety(Hand.kLeft),
-        () -> mainStick.getx(Hand.kleft),
-        () -> mainStick.getx(Hand.kright)
+        () -> mainStick.getY(Hand.kLeft),
+        () -> mainStick.getX(Hand.kLeft),
+        () -> mainStick.getX(Hand.kRight)
       ));
   }
 
