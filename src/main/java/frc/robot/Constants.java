@@ -9,7 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 
-/**
+/*
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
  * declared globally (i.e. public static).  Do not put anything functional in this class.
@@ -33,7 +33,6 @@ public final class Constants {
 
     public static final class OIConstants {
         public static final int stickPort = 0;
-
         public static final int intakeButtonNum = XboxController.Button.kA.value;
     }
    
@@ -42,6 +41,9 @@ public final class Constants {
         public static final double BallIntakeSpeed = 0.5;
         public static final double BallExhaustSpeed = -0.5;
         public static final double IntakeStopSpeed = 0.0;
+        public static final double BallIntakePercentOutput = 0.5;
+        public static final double BallExhaustPercentOutput = -0.5;
+        public static final double BallIntakestop = 0.0;
     }
 
     public static final class LauncherConstants {
@@ -57,7 +59,7 @@ public final class Constants {
 
     }
     public static final class CameraConstants {
-        public static final NetworkTableInstance Networktable = NetworkTableInstance.getDefault();
+        public static final String cameraTableName = "camera_name";
 
     }
 
