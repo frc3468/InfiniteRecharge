@@ -7,41 +7,43 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.DemandType;
-import com.ctre.phoenix.motorcontrol.FollowerType;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.Encoder;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.LauncherConstants;
 
 public class Launcher extends SubsystemBase {
 
-  private TalonSRX rightLaunchMotor;
-  private TalonSRX leftLaunchMotor; 
+  private CANSparkMax rightLaunchMotor;
+  private CANSparkMax leftLaunchMotor; 
+  private CANEncoder leftMotorEncoder;
+  private CANEncoder rightMotorEncoder;
 
   public Launcher() {
-    rightLaunchMotor = new TalonSRX(LauncherConstants.rightLaunchMotor);
-    leftLaunchMotor = new TalonSRX(LauncherConstants.leftLaunchMotor);
+    rightLaunchMotor = new CANSparkMax(LauncherConstants.rightLaunchMotor, MotorType.kBrushless);
+    leftLaunchMotor = new CANSparkMax(LauncherConstants.leftLaunchMotor, MotorType.kBrushless);
   }
 
   public void setVelocity() {
-    rightLaunchMotor.set(ControlMode.PercentOutput, LauncherConstants.rightLaunchMotorVelocity);
-    leftLaunchMotor.set(ControlMode.PercentOutput, LauncherConstants.leftLaunchMotorVelocity);
+    rightLaunchMotor.set(LauncherConstants.rightLaunchMotorVelocity);
+    leftLaunchMotor.set(LauncherConstants.leftLaunchMotorVelocity);
   }
 
   public void setSpeed() {
-    rightLaunchMotor.set(ControlMode.PercentOutput, LauncherConstants.rightLaunchMotorSpeed);
-    leftLaunchMotor.set(ControlMode.PercentOutput, LauncherConstants.leftLaunchMotorSpeed);
+    rightLaunchMotor.set(LauncherConstants.rightLaunchMotorSpeed);
+    leftLaunchMotor.set(LauncherConstants.leftLaunchMotorSpeed);
   }
 
   public void stop() {
-    rightLaunchMotor.set(ControlMode.PercentOutput, LauncherConstants.rightLaunchStopSpeed);
-    leftLaunchMotor.set(ControlMode.PercentOutput, LauncherConstants.leftLaunchStopSpeed);
+    rightLaunchMotor.set(LauncherConstants.rightLaunchStopSpeed);
+    leftLaunchMotor.set(LauncherConstants.leftLaunchStopSpeed);
   }
 
   public double getVelocity() {
-    leftLaunchMotor.follow(rightLaunchMotor, FollowerType.AuxOutput1);
+    double sum = leftMotorEncoder.getVelocity() + rightMotorEncoder.getVelocity();
+    double average = sum / 2;
+    return average;
   }
 
   @Override
