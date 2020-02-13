@@ -43,14 +43,14 @@ public class Camera extends SubsystemBase {
    */
   public Camera() {
     NetworkTableInstance table = NetworkTableInstance.getDefault();    
-    NetworkTable cameraTable = NetworkTableInstance.getTable(CameraConstants.chameleonName).getSubTable(CameraConstants.cameraTableName);
+    NetworkTable cameraTable = table.getTable(CameraConstants.chameleonName).getSubTable(CameraConstants.cameraTableName);
     area = cameraTable.getEntry("targetArea");
     solvepnp = cameraTable.getEntry("targetPose");
     // Anything involving snpnp probably shouldn't be in constructor. Check with gustave then move it If suppose d
     spnpArray = solvepnp.getDoubleArray(spnpArray);
-    xfromgoal = spnpArray[1];
-    yfromgoal = spnpArray[2];
-    cameraAngle = spnpArray[3];
+    //xfromgoal = spnpArray[1];
+    //yfromgoal = spnpArray[2];
+    //cameraAngle = spnpArray[3];
     cameraPitch = cameraTable.getEntry("targetPitch");
     cameraYaw = cameraTable.getEntry("targetYaw");
     cameraValid = cameraTable.getEntry("isValid");
@@ -94,7 +94,7 @@ public class Camera extends SubsystemBase {
     return cameraValid.getBoolean(false); 
   };
   
-  public boolean Distance(){
+  public double Distance(){
     return spnpArray[1];
   };
 }; 
