@@ -27,11 +27,7 @@ public class Camera extends SubsystemBase {
 
   public NetworkTableEntry solvepnp;
 
-  //spnp stands for solve pnp
-  public double spnpArray[];
-  public double xfromgoal;
-  public double yfromgoal;
-  public double cameraAngle; 
+  //spnp stands for solve pnp 
   public final NetworkTableEntry cameraPitch; 
   public final NetworkTableEntry cameraYaw;
   public final NetworkTableEntry cameraValid;
@@ -42,15 +38,11 @@ public class Camera extends SubsystemBase {
    * Creates a new ExampleSubsystem.
    */
   public Camera() {
-    NetworkTableInstance table = NetworkTableInstance.getDefault();    
-    NetworkTable cameraTable = table.getTable(CameraConstants.chameleonName).getSubTable(CameraConstants.cameraTableName);
+    final NetworkTableInstance table = NetworkTableInstance.getDefault();
+    final NetworkTable cameraTable = table.getTable(CameraConstants.chameleonName)
+        .getSubTable(CameraConstants.cameraTableName);
     area = cameraTable.getEntry("targetArea");
     solvepnp = cameraTable.getEntry("targetPose");
-    // Anything involving snpnp probably shouldn't be in constructor. Check with gustave then move it If suppose d
-    spnpArray = solvepnp.getDoubleArray(spnpArray);
-    //xfromgoal = spnpArray[1];
-    //yfromgoal = spnpArray[2];
-    //cameraAngle = spnpArray[3];
     cameraPitch = cameraTable.getEntry("targetPitch");
     cameraYaw = cameraTable.getEntry("targetYaw");
     cameraValid = cameraTable.getEntry("isValid");
@@ -60,43 +52,30 @@ public class Camera extends SubsystemBase {
   public final void periodic() {
     // This method will be called once per scheduler run
 
-    };
-
-  /*public double distance(){
-    //backup code its outdated.
-    return area.getdouble(0.0) * conversionrate;
-  };
-  */
-
-  public double xOffset(){
-    // in this case negative numbers would be left and posotive would be right 
-    // an example in psuedo code would be 
-    /* 
-    if(xOffset < 0){ 
-    bool left = true
-    };
-    elseif(xOffset > 0){
-    bool right = true
-    };
-    else(){
-    bool onTarget = true
-    };
-    */
-    return cameraPitch.getDouble(0) ;
+    
   };
 
-  public double yOffset(){
 
-    return cameraYaw.getDouble(0);
+ 
+
+  public double xfromgoal(){
+    double[] arrayAtPoint = solvepnp.getDoubleArray(new double[3]);
+    return arrayAtPoint[1];
+
   };
 
-  public boolean isvalid(){
-    return cameraValid.getBoolean(false); 
+  public double yfromgoal(){
+    double[] arrayAtPoint = solvepnp.getDoubleArray(new double[3]);
+    return arrayAtPoint[2];
+
   };
   
-  public double Distance(){
-    return spnpArray[1];
+  public double cameraAngle(){
+    double[] arrayAtPoint = solvepnp.getDoubleArray(new double[3]);
+    return arrayAtPoint[3];
   };
+  public boolean isValid(){
+
+    return cameraValid.getBoolean(false);
+  }
 }; 
-
-
