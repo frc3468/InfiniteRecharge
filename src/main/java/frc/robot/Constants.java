@@ -38,6 +38,9 @@ public final class Constants {
    
     public static final class IntakeConstants {
         public static final int IntakeMotor = 0;
+        public static final double BallIntakeSpeed = 0.5;
+        public static final double BallExhaustSpeed = -0.5;
+        public static final double IntakeStopSpeed = 0.0;
         public static final double BallIntakePercentOutput = 0.5;
         public static final double BallExhaustPercentOutput = -0.5;
         public static final double BallIntakestop = 0.0;
