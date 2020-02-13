@@ -46,6 +46,7 @@ public class Camera extends SubsystemBase {
     NetworkTable cameraTable = NetworkTableInstance.getTable(CameraConstants.chameleonName).getSubTable(CameraConstants.cameraTableName);
     area = cameraTable.getEntry("targetArea");
     solvepnp = cameraTable.getEntry("targetPose");
+    // Anything involving snpnp probably shouldn't be in constructor. Check with gustave then move it If suppose d
     spnpArray = solvepnp.getDoubleArray(spnpArray);
     xfromgoal = spnpArray[1];
     yfromgoal = spnpArray[2];
