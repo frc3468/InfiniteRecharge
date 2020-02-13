@@ -92,6 +92,10 @@ public class Camera extends SubsystemBase {
   public boolean isvalid(){
     return cameraValid.getBoolean(false); 
   };
+  
+  public boolean Distance(){
+    return spnpArray[1];
+  };
 }; 
 
 
