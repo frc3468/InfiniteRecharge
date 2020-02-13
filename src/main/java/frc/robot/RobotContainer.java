@@ -16,6 +16,7 @@ import frc.robot.commands.Retreat;
 import frc.robot.commands.StopConveyor;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.BallIntake;
+import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;

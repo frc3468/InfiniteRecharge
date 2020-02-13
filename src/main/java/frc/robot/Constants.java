@@ -60,6 +60,7 @@ public final class Constants {
     }
     public static final class CameraConstants {
         public static final String cameraTableName = "camera_name";
+        public static final String chameleonName = "chameleon-vision";
 
     }
 

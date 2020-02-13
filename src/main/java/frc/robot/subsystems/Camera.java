@@ -15,19 +15,19 @@ import frc.robot.Constants.CameraConstants;
 
 
 
-  
+
 
 
 public class Camera extends SubsystemBase {
-  
+
   // This was gathered by mesuring the distance from the camera from the goal then realizing x*area=distance in which x is the total or the conversion rate
-     
-   
+
+
   NetworkTableInstance table;
   NetworkTableEntry area;
-  
+
   NetworkTableEntry solvepnp;
-  
+
   //spnp stands for solve pnp
   double spnpArray[];
   double xfromgoal;
@@ -59,9 +59,9 @@ public class Camera extends SubsystemBase {
   @Override
   public final void Periodic() {
     // This method will be called once per scheduler run
-    
+
     };
-  
+
   /*public double distance(){
     //backup code its outdated.
     return area.getdouble(0.0) * conversionrate;
@@ -82,7 +82,7 @@ public class Camera extends SubsystemBase {
     bool onTarget = true
     };
     */
-    
+
     return pitch.getDouble(0) ;
   };
 
