@@ -58,9 +58,10 @@ public final class Constants {
         public static final int launchVelocity = 90; 
 
     }
-    public static final class CameraConstants {
-        public static final String cameraTableName = "camera_name";
-        public static final String chameleonName = "chameleon-vision";
+    public  final class CameraConstants {
+        // Make sure to look at this and possibly renable static at one point.  Cannot be refrenced in non static field
+        public final String cameraTableName = "camera_name";
+        public final String chameleonName = "chameleon-vision";
 
     }
 
