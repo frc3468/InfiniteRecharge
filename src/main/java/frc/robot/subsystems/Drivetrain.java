@@ -7,18 +7,12 @@
 
 package frc.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.SparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.jni.CANSparkMaxJNI;
 
-import edu.wpi.first.wpilibj.PWMSparkMax;
-import edu.wpi.first.wpilibj.PWMSpeedController;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DrivetrainConstants;
-import frc.robot.commands.CartesianDrive;
 
 public class Drivetrain extends SubsystemBase {
   private CANSparkMax frontLeftDriveMotor;
@@ -43,6 +37,10 @@ public class Drivetrain extends SubsystemBase {
   public void cartesianDrive(double magnitudey, double magnitudex, double rotation) {
     robotDrive.driveCartesian(magnitudey, magnitudex, rotation);
   }
+
+  public float navyaw(){
+    return navX.getYaw();
+  };
 
   @Override
   public void periodic() {
