@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-
+import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMax;
@@ -26,6 +26,7 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax frontRightDriveMotor;
   private CANSparkMax rearRightDriveMotor;
   private MecanumDrive robotDrive;
+  private AHRS navX;
   /**
    * Creates a new Drivetrain.
    */
@@ -35,7 +36,8 @@ public class Drivetrain extends SubsystemBase {
     frontRightDriveMotor = new CANSparkMax(DrivetrainConstants.frontRightDriveMotor, MotorType.kBrushless);
     rearRightDriveMotor = new CANSparkMax(DrivetrainConstants.rearRightDriveMotor, MotorType.kBrushless);
     //
-    robotDrive = new MecanumDrive(frontLeftDriveMotor, rearLeftDriveMotor, frontRightDriveMotor, rearRightDriveMotor);
+    robotDrive = new MecanumDrive(frontLeftDriveMotor, rearLeftDriveMotor, frontRightDriveMotor, rearRightDriveMotor); 
+    navX = new AHRS();
   }
 
   public void cartesianDrive(double magnitudey, double magnitudex, double rotation) {
