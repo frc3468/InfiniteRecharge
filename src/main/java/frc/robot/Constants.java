@@ -34,6 +34,7 @@ public final class Constants {
     public static final class OIConstants {
         public static final int stickPort = 0;
         public static final int intakeButtonNum = XboxController.Button.kA.value;
+        public static final int intakeLauncherNum = XboxController.Button.kB.value;
     }
    
     public static final class IntakeConstants {
@@ -48,16 +49,17 @@ public final class Constants {
 
     public static final class LauncherConstants {
         public static final int rightLaunchMotor = 1;
-        public static final int leftLaunchMotor = 2;
-        public static final double rightLaunchMotorVelocity = 0.8;
-        public static final double leftLaunchMotorVelocity = -0.8;
-        public static final double rightLaunchMotorSpeed = 0.6;
-        public static final double leftLaunchMotorSpeed = -0.6;
-        public static final double rightLaunchStopSpeed = 0.0;
-        public static final double leftLaunchStopSpeed = 0.0;
-        public static final int launchVelocity = 90; 
-
+        public static final int leftLaunchMotor = 2; 
+        public static final double proportialPIDConstant = 1.0;
+        public static final double integralPIDConstant = 0.0;
+        public static final double derivativePIDConstant = 0.0;
+        public static final double integralPIDZone = 0.0;
+        public static final double feedForwardPIDConstant = 0.0;
+        public static final double maxPIDOutput = 1.0;
+        public static final double minPIDOutput = -1.0;
+        public static final double velocityPIDTolerance = 10; 
     }
+
     public static final class CameraConstants {
         // Make sure to look at this and possibly renable static at one point.  Cannot be refrenced in non static field
         public static final String cameraTableName = "camera_name";

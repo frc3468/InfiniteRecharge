@@ -12,12 +12,14 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.Advance;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Intake;
+import frc.robot.commands.SetLauncherVelocity;
 import frc.robot.commands.Retreat;
 import frc.robot.commands.StopConveyor;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.BallIntake;
 import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Launcher;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -35,6 +37,7 @@ public class RobotContainer {
   private final Conveyor conveyor = new Conveyor();
   private final BallIntake ballIntake = new BallIntake();
   private final Camera camera = new Camera();
+  private final Launcher launcher = new Launcher();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   XboxController stick = new XboxController(OIConstants.stickPort);
 
@@ -56,11 +59,13 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     JoystickButton intakeButton = new JoystickButton(stick, OIConstants.intakeButtonNum);
+    JoystickButton launcherButton = new JoystickButton(stick, OIConstants.intakeLauncherNum);
     
     Trigger initialConveyorDetector = new Trigger(() -> conveyor.InitialConveyorSensorGet());
     Trigger finalConveyorDetector = new Trigger(() -> conveyor.FinalConveyorSensorGet());
     Trigger launcherConveyorDetector = new Trigger(() -> conveyor.LauncherConveyorSensorGet());
-
+    Trigger launcherOnTarget = new Trigger(() -> launcher.isOnTarget());
+    
     // Intake
     intakeButton.and(
       finalConveyorDetector.or(launcherConveyorDetector).negate()
@@ -70,9 +75,16 @@ public class RobotContainer {
     intakeButton.and(
       initialConveyorDetector.or(finalConveyorDetector)
       .and(launcherConveyorDetector.negate())
-    )
-    .whileActiveContinuous(new Advance(conveyor));
+    ).whileActiveContinuous(new Advance(conveyor));
 
+    // Launcher
+    launcherButton.whileActiveContinuous(new SetLauncherVelocity(launcher));
+    launcherButton.and(
+      launcherOnTarget
+    ).whileActiveContinuous(new Advance(conveyor));
+    launcherButton.and(
+      launcherOnTarget.and(launcherConveyorDetector.negate()
+    ).whileActiveContinuous(new Advance(conveyor)));
   }
 
 

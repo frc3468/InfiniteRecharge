@@ -7,16 +7,22 @@
 
 package frc.robot.commands;
 
+import java.util.function.DoubleSupplier;
+
+import com.fasterxml.jackson.databind.ser.std.NumberSerializers.DoubleSerializer;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Launcher;
 
-public class Launch extends CommandBase {
+public class SetLauncherVelocity extends CommandBase {
   private Launcher launcher;
+  private DoubleSupplier velocity;
   /**
-   * Creates a new Launch.
+   * Creates a new SetLauncherVelocity.
    */
-  public Launch(Launcher subsystem) {
-    launcher = subsystem;
+  public SetLauncherVelocity(Launcher subsystem, DoubleSupplier velocitySource) {
+    launcher = subsystem; 
+    velocity = velocitySource;
     addRequirements(launcher);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -29,7 +35,7 @@ public class Launch extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    launcher.setVelocity(velocity.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.
