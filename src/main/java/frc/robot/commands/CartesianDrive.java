@@ -11,7 +11,6 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
-
 public class CartesianDrive extends CommandBase {
   private static final int DRIVEEXPONENT = 3;
   private Drivetrain robotDrive;
