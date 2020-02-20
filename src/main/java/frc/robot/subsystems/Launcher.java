@@ -65,12 +65,14 @@ public class Launcher extends SubsystemBase {
     setSpeed(0.0);
   }
 
+  // Finds the average velocity of the two motors 
   public double getVelocity() {
     double sum = rightMotorEncoder.getVelocity() + leftMotorEncoder.getVelocity();
     double average = sum / 2;
     return average;
   }
 
+  // For the target velocity
   public boolean isOnTarget() {
     boolean rightOnTarget = Math.abs(targetVelocity - rightMotorEncoder.getVelocity()) <= LauncherConstants.velocityPIDTolerance;
     boolean leftOnTarget = Math.abs(targetVelocity - leftMotorEncoder.getVelocity()) <= LauncherConstants.velocityPIDTolerance;

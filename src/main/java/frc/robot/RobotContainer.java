@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.VelocityMeasPeriod;
+
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.Advance;
@@ -66,6 +68,7 @@ public class RobotContainer {
     Trigger launcherConveyorDetector = new Trigger(() -> conveyor.LauncherConveyorSensorGet());
     Trigger launcherOnTarget = new Trigger(() -> launcher.isOnTarget());
     
+
     // Intake
     intakeButton.and(
       finalConveyorDetector.or(launcherConveyorDetector).negate()
@@ -78,13 +81,13 @@ public class RobotContainer {
     ).whileActiveContinuous(new Advance(conveyor));
 
     // Launcher
-    launcherButton.whileActiveContinuous(new SetLauncherVelocity(launcher));
+    launcherButton.whileActiveContinuous(new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(camera.yfromgoal())));
     launcherButton.and(
       launcherOnTarget
     ).whileActiveContinuous(new Advance(conveyor));
     launcherButton.and(
-      launcherOnTarget.and(launcherConveyorDetector.negate()
-    ).whileActiveContinuous(new Advance(conveyor)));
+      launcherOnTarget.negate().and(launcherConveyorDetector.negate())
+    ).whileActiveContinuous(new Advance(conveyor));
   }
 
 
