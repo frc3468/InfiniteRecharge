@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.VelocityMeasPeriod;
-
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.Advance;
