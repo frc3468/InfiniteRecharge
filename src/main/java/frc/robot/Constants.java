@@ -33,10 +33,21 @@ public final class Constants {
 
     public static final class OIConstants {
         public static final int stickPort = 0;
+        public static final int overrideJoystick = 1;
         public static final int intakeButtonNum = XboxController.Button.kA.value;
         public static final int intakeLauncherNum = XboxController.Button.kB.value;
     }
-   
+
+   public static final class OverrideJoystickConstants {
+        public static final int intakeOverrideNum = 0;
+        public static final int exhaustOverrideNum = 1;
+        public static final int advanceOverrideNum = 2;
+        public static final int retreatOverrideNum = 3;
+        public static final int setLauncherVelocityOverrideNum = 4;
+        public static final int setLauncherSpeedOverrideNum = 5;
+        public static final int launcherSpeedJoystick = 6;
+   }
+
     public static final class IntakeConstants {
         public static final int IntakeMotor = 0;
         public static final double BallIntakeSpeed = 0.5;
