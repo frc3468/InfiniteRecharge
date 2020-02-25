@@ -37,7 +37,7 @@ public class CartesianDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    robotDrive.cartesianDrive(Math.pow(magy.getAsDouble(), DRIVEEXPONENT), Math.pow(magx.getAsDouble(), DRIVEEXPONENT), Math.pow(rot.getAsDouble(), DRIVEEXPONENT));
+    robotDrive.cartesianDrive(Math.pow(magy.getAsDouble(), DRIVEEXPONENT), Math.pow(-magx.getAsDouble(), DRIVEEXPONENT), Math.pow(rot.getAsDouble(), DRIVEEXPONENT));
   }
 
   // Called once the command ends or is interrupted.

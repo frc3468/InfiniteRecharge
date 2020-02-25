@@ -41,8 +41,8 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(
       new CartesianDrive(
         drivetrain,
-        () -> mainStick.getY(Hand.kLeft),
         () -> mainStick.getX(Hand.kLeft),
+        () -> mainStick.getY(Hand.kLeft),
         () -> mainStick.getX(Hand.kRight)
       ));
   }
