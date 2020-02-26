@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.Constants.DriverControllerConstants;
 import frc.robot.Constants.OverrideControllerConstants;
 import frc.robot.commands.AdvanceConveyor;
@@ -17,10 +18,12 @@ import frc.robot.commands.ExhaustBallIntake;
 import frc.robot.commands.SetLauncherVelocity;
 import frc.robot.commands.RetreatConveyor;
 import frc.robot.commands.SetLauncherSpeed;
-import frc.robot.subsystems.Conveyor;
+import frc.robot.commands.CartesianDrive;
+import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.BallIntake;
-import frc.robot.subsystems.Camera;
+import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Launcher;
+import frc.robot.subsystems.Camera;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -34,8 +37,9 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final Conveyor conveyor = new Conveyor();
+  private final Drivetrain drivetrain = new Drivetrain();
   private final BallIntake ballIntake = new BallIntake();
+  private final Conveyor conveyor = new Conveyor();
   private final Launcher launcher = new Launcher();
   private final Camera camera = new Camera();
 
@@ -50,13 +54,15 @@ public class RobotContainer {
 
     configureButtonBindings();
 
+    drivetrain.setDefaultCommand(new CartesianDrive(drivetrain, () -> driverController.getX(Hand.kLeft),
+        () -> driverController.getY(Hand.kLeft), () -> driverController.getX(Hand.kRight)));
   }
 
   /*
-   * Use this method to define your button->command mappings.  Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
-   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   * Use this method to define your button->command mappings. Buttons can be
+   * created by instantiating a {@link GenericHID} or one of its subclasses
+   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
+   * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
     // Driver Controller Buttons
@@ -64,43 +70,41 @@ public class RobotContainer {
     JoystickButton launchButton = new JoystickButton(driverController, DriverControllerConstants.launchButton);
 
     // Override Controller Buttons
-    JoystickButton IntakeBallIntakeOverrideButton = new JoystickButton(overrideController, OverrideControllerConstants.intakeBallIntakeButton);
-    JoystickButton exhaustBallIntakeOverrideButton = new JoystickButton(overrideController, OverrideControllerConstants.exhaustBallIntakeButton);
-    JoystickButton advanceConveyorOverrideButton = new JoystickButton(overrideController, OverrideControllerConstants.advanceConveyorButton);
-    JoystickButton retreatConveyorOverrideButton = new JoystickButton(overrideController, OverrideControllerConstants.retreatConveyorButton);
-    JoystickButton setLauncherVelocityOverrideButton = new JoystickButton(overrideController, OverrideControllerConstants.launcherVelocityButton);
-    JoystickButton setLauncherSpeedOverrideButton = new JoystickButton(overrideController, OverrideControllerConstants.launcherSpeedButton);
+    JoystickButton IntakeBallIntakeOverrideButton = new JoystickButton(overrideController,
+        OverrideControllerConstants.intakeBallIntakeButton);
+    JoystickButton exhaustBallIntakeOverrideButton = new JoystickButton(overrideController,
+        OverrideControllerConstants.exhaustBallIntakeButton);
+    JoystickButton advanceConveyorOverrideButton = new JoystickButton(overrideController,
+        OverrideControllerConstants.advanceConveyorButton);
+    JoystickButton retreatConveyorOverrideButton = new JoystickButton(overrideController,
+        OverrideControllerConstants.retreatConveyorButton);
+    JoystickButton setLauncherVelocityOverrideButton = new JoystickButton(overrideController,
+        OverrideControllerConstants.launcherVelocityButton);
+    JoystickButton setLauncherSpeedOverrideButton = new JoystickButton(overrideController,
+        OverrideControllerConstants.launcherSpeedButton);
 
     // Internal Robot Triggers
     Trigger initialConveyorDetector = new Trigger(() -> conveyor.getInitialConveyorSensor());
     Trigger finalConveyorDetector = new Trigger(() -> conveyor.getFinalConveyorSensor());
     Trigger launcherConveyorDetector = new Trigger(() -> conveyor.getLauncherConveyorSensor());
     Trigger launcherOnTarget = new Trigger(() -> launcher.isOnTarget());
-    
 
     // Intake
-    intakeButton.and(
-      finalConveyorDetector.or(launcherConveyorDetector).negate()
-    ).whileActiveContinuous(new IntakeBallIntake(ballIntake));
-    
+    intakeButton.and(finalConveyorDetector.or(launcherConveyorDetector).negate())
+        .whileActiveContinuous(new IntakeBallIntake(ballIntake));
+
     // Conveyor
-    intakeButton.and(
-      initialConveyorDetector.or(finalConveyorDetector)
-      .and(launcherConveyorDetector.negate())
-    ).whileActiveContinuous(new AdvanceConveyor(conveyor));
+    intakeButton.and(initialConveyorDetector.or(finalConveyorDetector).and(launcherConveyorDetector.negate()))
+        .whileActiveContinuous(new AdvanceConveyor(conveyor));
 
     // Launcher
-    launchButton.or(setLauncherVelocityOverrideButton).whileActiveContinuous(new SetLauncherVelocity(launcher, 
-      () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
-    launchButton.and(
-      launcherOnTarget
-    ).whileActiveContinuous(new AdvanceConveyor(conveyor));
-    launchButton.and(
-      launcherOnTarget.negate().and(launcherConveyorDetector.negate())
-    ).whileActiveContinuous(new AdvanceConveyor(conveyor));
+    launchButton.or(setLauncherVelocityOverrideButton).whileActiveContinuous(
+        new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
+    launchButton.and(launcherOnTarget).whileActiveContinuous(new AdvanceConveyor(conveyor));
+    launchButton.and(launcherOnTarget.negate().and(launcherConveyorDetector.negate()))
+        .whileActiveContinuous(new AdvanceConveyor(conveyor));
 
-
-    //Intake Override 
+    // Intake Override
     IntakeBallIntakeOverrideButton.whileHeld(new IntakeBallIntake(ballIntake));
     exhaustBallIntakeOverrideButton.whileHeld(new ExhaustBallIntake(ballIntake));
 
@@ -109,13 +113,12 @@ public class RobotContainer {
     retreatConveyorOverrideButton.whileHeld(new RetreatConveyor(conveyor));
 
     // Launcher Override
-    setLauncherVelocityOverrideButton.whileHeld(new SetLauncherVelocity(launcher, 
-      () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
-    setLauncherSpeedOverrideButton.whileHeld(new SetLauncherSpeed(launcher, 
-      () -> overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis)));
-    
-  }
+    setLauncherVelocityOverrideButton
+        .whileHeld(new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
+    setLauncherSpeedOverrideButton.whileHeld(new SetLauncherSpeed(launcher,
+        () -> overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis)));
 
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

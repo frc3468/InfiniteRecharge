@@ -25,7 +25,7 @@ public final class Constants {
         public static final int launchButton = XboxController.Button.kB.value;
     }
 
-   public static final class OverrideControllerConstants {
+    public static final class OverrideControllerConstants {
         public static final int overrideControllerPort = 1;
         public static final int launcherSpeedAxis = 1;
         public static final int launcherSpeedButton = 1;
@@ -40,7 +40,14 @@ public final class Constants {
         public static final int retreatConveyorButton = 10;
         public static final int intakeBallIntakeButton = 11;
         public static final int exhaustBallIntakeButton = 12;
-   }
+    }
+
+    public static final class DrivetrainConstants {
+        public static final int frontLeftDriveMotor = 1;
+        public static final int rearLeftDriveMotor = 2;
+        public static final int frontRightDriveMotor = 3;
+        public static final int rearRightDriveMotor = 4;
+    }
 
     public static final class BallIntakeConstants {
         public static final int intakeMotor = 0;
