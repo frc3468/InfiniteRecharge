@@ -19,6 +19,36 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public final class Constants {
 
+    public static final class DriverControllerConstants {
+        public static final int driverControllerPort = 0;
+        public static final int intakeButton = XboxController.Button.kA.value;
+        public static final int launchButton = XboxController.Button.kB.value;
+    }
+
+   public static final class OverrideControllerConstants {
+        public static final int overrideControllerPort = 1;
+        public static final int launcherSpeedAxis = 1;
+        public static final int launcherSpeedButton = 1;
+        public static final int launcherVelocityButton = 2;
+        public static final int raiseCPManipulatorButton = 3;
+        public static final int raiseLiftHookButton = 4;
+        public static final int advanceCPManipulatorButton = 5;
+        public static final int regressCPManipulatorButton = 6;
+        public static final int advanceLiftWinchButton = 7;
+        public static final int regressLiftWinchButton = 8;
+        public static final int advanceConveyorButton = 9;
+        public static final int retreatConveyorButton = 10;
+        public static final int intakeBallIntakeButton = 11;
+        public static final int exhaustBallIntakeButton = 12;
+   }
+
+    public static final class BallIntakeConstants {
+        public static final int intakeMotor = 0;
+        public static final double intakeSpeed = 0.5;
+        public static final double exhaustSpeed = -0.5;
+        public static final double stopSpeed = 0.0;
+    }
+
     public static final class ConveyorConstants {
 
         public static final int conveyorMotor = 0;
@@ -29,33 +59,6 @@ public final class Constants {
         public static final double conveyorMotorRetreatSpeed = -0.7;
         public static final double conveyorMotorStopSpeed = 0.0;
 
-    }
-
-    public static final class OIConstants {
-        public static final int stickPort = 0;
-        public static final int overrideJoystick = 1;
-        public static final int intakeButtonNum = XboxController.Button.kA.value;
-        public static final int intakeLauncherNum = XboxController.Button.kB.value;
-    }
-
-   public static final class OverrideJoystickConstants {
-        public static final int intakeOverrideNum = 0;
-        public static final int exhaustOverrideNum = 1;
-        public static final int advanceOverrideNum = 2;
-        public static final int retreatOverrideNum = 3;
-        public static final int setLauncherVelocityOverrideNum = 4;
-        public static final int setLauncherSpeedOverrideNum = 5;
-        public static final int launcherSpeedJoystick = 6;
-   }
-
-    public static final class IntakeConstants {
-        public static final int IntakeMotor = 0;
-        public static final double BallIntakeSpeed = 0.5;
-        public static final double BallExhaustSpeed = -0.5;
-        public static final double IntakeStopSpeed = 0.0;
-        public static final double BallIntakePercentOutput = 0.5;
-        public static final double BallExhaustPercentOutput = -0.5;
-        public static final double BallIntakestop = 0.0;
     }
 
     public static final class LauncherConstants {

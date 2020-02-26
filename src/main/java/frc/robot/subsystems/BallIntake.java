@@ -11,7 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.BallIntakeConstants;
 
 public class BallIntake extends SubsystemBase {
   /*
@@ -20,20 +20,16 @@ public class BallIntake extends SubsystemBase {
   public TalonSRX intakeMotor;
 
   public BallIntake() {
-    intakeMotor = new TalonSRX(IntakeConstants.IntakeMotor);
+    intakeMotor = new TalonSRX(BallIntakeConstants.intakeMotor);
   }
   public void intake() {
-    intakeMotor.set(ControlMode.PercentOutput, IntakeConstants.BallIntakeSpeed);
+    intakeMotor.set(ControlMode.PercentOutput, BallIntakeConstants.intakeSpeed);
   }
   public void exhaust() {
-    intakeMotor.set(ControlMode.PercentOutput, IntakeConstants.BallExhaustSpeed);
+    intakeMotor.set(ControlMode.PercentOutput, BallIntakeConstants.exhaustSpeed);
   }
   public void stop() {
-    intakeMotor.set(ControlMode.PercentOutput, IntakeConstants.IntakeStopSpeed);
-  }
-  
-  public void Stop() {
-    intakeMotor.set(ControlMode.PercentOutput, IntakeConstants.BallIntakestop);
+    intakeMotor.set(ControlMode.PercentOutput, BallIntakeConstants.stopSpeed);
   }
 
   @Override

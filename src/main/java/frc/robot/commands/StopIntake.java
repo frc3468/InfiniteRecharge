@@ -29,7 +29,7 @@ public class StopIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ballIntake.Stop();
+    ballIntake.stop();
   }
 
   // Called once the command ends or is interrupted.

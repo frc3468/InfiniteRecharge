@@ -10,14 +10,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.BallIntake;
 
-public class Intake extends CommandBase {
+public class IntakeBallIntake extends CommandBase {
   private BallIntake ballIntake;
 
   /* 
-   * Creates a new Intake.
+   * Creates a new IntakeBallIntake.
    */
   
-  public Intake(BallIntake subsystem) {
+  public IntakeBallIntake(BallIntake subsystem) {
     ballIntake = subsystem;
     addRequirements(ballIntake);
     // Use addRequirements() here to declare subsystem dependencies.

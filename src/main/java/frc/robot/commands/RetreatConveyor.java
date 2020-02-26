@@ -8,16 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BallIntake;
+import frc.robot.subsystems.Conveyor;
 
-public class Exhaust extends CommandBase {
-  private BallIntake ballIntake;
+public class RetreatConveyor extends CommandBase {
+  private final Conveyor conveyor;
   /**
-   * Creates a new Exhaust.
+   * Creates a new RetreatConveyor.
    */
-  public Exhaust(BallIntake subsystem) {
-    ballIntake = subsystem;
-    addRequirements(ballIntake);
+  public RetreatConveyor(Conveyor subsystem) {
+    conveyor = subsystem;
+    addRequirements(conveyor);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -29,13 +29,13 @@ public class Exhaust extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ballIntake.exhaust();
+    conveyor.retreat();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    ballIntake.stop();
+    conveyor.stop();
   }
 
   // Returns true when the command should end.
