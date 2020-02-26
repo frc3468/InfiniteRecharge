@@ -24,7 +24,7 @@ public class Camera extends SubsystemBase {
 
   private NetworkTable cameraTable;
 
-  private NetworkTableEntry solvepnp;
+  private NetworkTableEntry robotPose;
 
   private NetworkTableEntry validTarget;
   private NetworkTableEntry targetArea;
@@ -42,7 +42,7 @@ public class Camera extends SubsystemBase {
       .getSubTable(CameraConstants.cameraTableName
     );
     
-    solvepnp = cameraTable.getEntry("targetPose");
+    robotPose = cameraTable.getEntry("targetPose");
 
     validTarget = cameraTable.getEntry("isValid");
     targetArea = cameraTable.getEntry("targetArea");
@@ -51,18 +51,18 @@ public class Camera extends SubsystemBase {
   }
 
   public double getDistanceFromGoal(){
-    double[] solvepnpArray = solvepnp.getDoubleArray(new double[] {0.0,0.0,0.0});
-    return solvepnpArray[0];
+    double[] poseArray = robotPose.getDoubleArray(new double[] {0.0,0.0,0.0});
+    return poseArray[0];
   }
 
   public double getOffsetFromGoal(){
-    double[] solvepnpArray = solvepnp.getDoubleArray(new double[] {0.0,0.0,0.0});
-    return solvepnpArray[1];
+    double[] poseArray = robotPose.getDoubleArray(new double[] {0.0,0.0,0.0});
+    return poseArray[1];
   }
   
   public double getAngleFromGoal(){
-    double[] solvepnpArray = solvepnp.getDoubleArray(new double[] {0.0,0.0,0.0});
-    return solvepnpArray[2];
+    double[] poseArray = robotPose.getDoubleArray(new double[] {0.0,0.0,0.0});
+    return poseArray[2];
   }
 
   public boolean isValid(){
