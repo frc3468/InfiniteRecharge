@@ -22,15 +22,14 @@ public class Camera extends SubsystemBase {
 
   // This was gathered by mesuring the distance from the camera from the goal then realizing x*area=distance in which x is the total or the conversion rate
 
-   NetworkTableInstance table;
-  public NetworkTableEntry area;
+  private NetworkTable cameraTable;
 
-  public NetworkTableEntry solvepnp;
+  private NetworkTableEntry solvepnp;
 
-  //spnp stands for solve pnp 
-  public final NetworkTableEntry cameraPitch; 
-  public final NetworkTableEntry cameraYaw;
-  public final NetworkTableEntry cameraValid;
+  private NetworkTableEntry validTarget;
+  private NetworkTableEntry targetArea;
+  private NetworkTableEntry cameraPitch; 
+  private NetworkTableEntry cameraYaw;
 
   //Replace mycamname with the name of the camera once we get that set up  
 
@@ -38,44 +37,42 @@ public class Camera extends SubsystemBase {
    * Creates a new ExampleSubsystem.
    */
   public Camera() {
-    final NetworkTableInstance table = NetworkTableInstance.getDefault();
-    final NetworkTable cameraTable = table.getTable(CameraConstants.chameleonName)
-        .getSubTable(CameraConstants.cameraTableName);
-    area = cameraTable.getEntry("targetArea");
+    cameraTable = NetworkTableInstance.getDefault()
+      .getTable(CameraConstants.chameleonVisionTableName)
+      .getSubTable(CameraConstants.cameraTableName
+    );
+    
     solvepnp = cameraTable.getEntry("targetPose");
+
+    validTarget = cameraTable.getEntry("isValid");
+    targetArea = cameraTable.getEntry("targetArea");
     cameraPitch = cameraTable.getEntry("targetPitch");
     cameraYaw = cameraTable.getEntry("targetYaw");
-    cameraValid = cameraTable.getEntry("isValid");
-  };
+  }
+
+  public double getDistanceFromGoal(){
+    double[] solvepnpArray = solvepnp.getDoubleArray(new double[] {0.0,0.0,0.0});
+    return solvepnpArray[0];
+  }
+
+  public double getOffsetFromGoal(){
+    double[] solvepnpArray = solvepnp.getDoubleArray(new double[] {0.0,0.0,0.0});
+    return solvepnpArray[1];
+  }
+  
+  public double getAngleFromGoal(){
+    double[] solvepnpArray = solvepnp.getDoubleArray(new double[] {0.0,0.0,0.0});
+    return solvepnpArray[2];
+  }
+
+  public boolean isValid(){
+    return validTarget.getBoolean(false);
+  }
 
   @Override
   public final void periodic() {
     // This method will be called once per scheduler run
 
     
-  };
-
-
- 
-
-  public double xfromgoal(){
-    double[] arrayAtPoint = solvepnp.getDoubleArray(new double[3]);
-    return arrayAtPoint[1];
-
-  };
-
-  public double yfromgoal(){
-    double[] arrayAtPoint = solvepnp.getDoubleArray(new double[3]);
-    return arrayAtPoint[2];
-
-  };
-  
-  public double cameraAngle(){
-    double[] arrayAtPoint = solvepnp.getDoubleArray(new double[3]);
-    return arrayAtPoint[3];
-  };
-  public boolean isValid(){
-
-    return cameraValid.getBoolean(false);
   }
-}; 
+}

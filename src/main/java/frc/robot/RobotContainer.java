@@ -91,7 +91,7 @@ public class RobotContainer {
 
     // Launcher
     launchButton.or(setLauncherVelocityOverrideButton).whileActiveContinuous(new SetLauncherVelocity(launcher, 
-      () -> Launcher.distanceToVelocity(camera.yfromgoal())));
+      () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
     launchButton.and(
       launcherOnTarget
     ).whileActiveContinuous(new AdvanceConveyor(conveyor));
@@ -110,7 +110,7 @@ public class RobotContainer {
 
     // Launcher Override
     setLauncherVelocityOverrideButton.whileHeld(new SetLauncherVelocity(launcher, 
-      () -> Launcher.distanceToVelocity(camera.yfromgoal())));
+      () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
     setLauncherSpeedOverrideButton.whileHeld(new SetLauncherSpeed(launcher, 
       () -> overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis)));
     
