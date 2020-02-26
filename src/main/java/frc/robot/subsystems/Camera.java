@@ -14,14 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CameraConstants;
 
 
-
-
-
-
 public class Camera extends SubsystemBase {
-
-  // This was gathered by mesuring the distance from the camera from the goal then realizing x*area=distance in which x is the total or the conversion rate
-
   private NetworkTable cameraTable;
 
   private NetworkTableEntry robotPose;
@@ -30,8 +23,6 @@ public class Camera extends SubsystemBase {
   private NetworkTableEntry targetArea;
   private NetworkTableEntry cameraPitch; 
   private NetworkTableEntry cameraYaw;
-
-  //Replace mycamname with the name of the camera once we get that set up  
 
   /**
    * Creates a new ExampleSubsystem.

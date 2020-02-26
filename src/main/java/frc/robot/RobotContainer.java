@@ -72,9 +72,9 @@ public class RobotContainer {
     JoystickButton setLauncherSpeedOverrideButton = new JoystickButton(overrideController, OverrideControllerConstants.launcherSpeedButton);
 
     // Internal Robot Triggers
-    Trigger initialConveyorDetector = new Trigger(() -> conveyor.InitialConveyorSensorGet());
-    Trigger finalConveyorDetector = new Trigger(() -> conveyor.FinalConveyorSensorGet());
-    Trigger launcherConveyorDetector = new Trigger(() -> conveyor.LauncherConveyorSensorGet());
+    Trigger initialConveyorDetector = new Trigger(() -> conveyor.getInitialConveyorSensor());
+    Trigger finalConveyorDetector = new Trigger(() -> conveyor.getFinalConveyorSensor());
+    Trigger launcherConveyorDetector = new Trigger(() -> conveyor.getLauncherConveyorSensor());
     Trigger launcherOnTarget = new Trigger(() -> launcher.isOnTarget());
     
 
