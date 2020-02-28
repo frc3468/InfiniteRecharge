@@ -67,17 +67,16 @@ public class ColorWheel extends SubsystemBase {
     return colorMatcher.matchClosestColor(colorSensor.getColor()).color;
   }
 
-  public Color getSensorColor() {
+  public Color getFieldSensorColor() {
     int phaseChange = ColorWheelConstants.colorWheel90DegreePhaseChange;
     Color currentColor = getCurrentColor();
-    int sensorColorIndex = -1;
     for(int i = 0; i < colorArray.length; i++) {
       if( currentColor == colorArray[i]) {
-        sensorColorIndex = (i+phaseChange)%colorArray.length;
-        break;
+        int sensorColorIndex = (i+phaseChange)%colorArray.length;
+        return colorArray[sensorColorIndex];
       }
     }
-    return colorArray[sensorColorIndex];
+    return null; // Current Color didn't match any in array (SHOULDN'T HAPPEN)
   }
 
   @Override
