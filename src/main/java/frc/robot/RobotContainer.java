@@ -24,6 +24,7 @@ import frc.robot.subsystems.BallIntake;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.Camera;
+import frc.robot.subsystems.ColorWheel;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -42,6 +43,7 @@ public class RobotContainer {
   private final Conveyor conveyor = new Conveyor();
   private final Launcher launcher = new Launcher();
   private final Camera camera = new Camera();
+  private final ColorWheel colorWheel = new ColorWheel();
 
   XboxController driverController = new XboxController(DriverControllerConstants.driverControllerPort);
   Joystick overrideController = new Joystick(OverrideControllerConstants.overrideControllerPort);

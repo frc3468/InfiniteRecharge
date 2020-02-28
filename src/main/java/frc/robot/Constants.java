@@ -7,7 +7,11 @@
 
 package frc.robot;
 
+import com.revrobotics.ColorMatch;
+
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.util.Color;
 
 /*
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -84,6 +88,21 @@ public final class Constants {
     public static final class CameraConstants {
         public static final String chameleonVisionTableName = "chameleon-vision";
         public static final String cameraTableName = "camera_name";
+    }
+
+    public static final class ColorWheelConstants {
+        public static final int manipulatorMotor = 10;
+        public static final int manipulatorServo = 1;
+        public static final I2C.Port colorSensorPort = I2C.Port.kOnboard;
+        public static final double manipulatorForwardSpeed = 0.2;
+        public static final double manipulatorReverseSpeed = 0.2;
+        public static final double manipulatorStowedPosition = 0.0;
+        public static final double manipulatorRaisedPosition = 1.0;
+        public static final Color blueColor = ColorMatch.makeColor(0.143, 0.427, 0.429);
+        public static final Color greenColor = ColorMatch.makeColor(0.197, 0.561, 0.240);
+        public static final Color redColor = ColorMatch.makeColor(0.561, 0.232, 0.114);
+        public static final Color yellowColor = ColorMatch.makeColor(0.361, 0.524, 0.113);
+        public static final int colorWheel90DegreePhaseChange = 2; // 2 color changes in 90deg
     }
 
 }
