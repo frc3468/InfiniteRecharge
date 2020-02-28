@@ -67,6 +67,12 @@ public class ColorWheel extends SubsystemBase {
     return colorMatcher.matchClosestColor(colorSensor.getColor()).color;
   }
 
+  /*
+   * We know based on the current reading of our sensor what the field sensor is
+   * reading by going to the color 90deg out-of-phase. By using the array of colors
+   * we can easily calculate this, PROVIDED we are moving the color wheel in the
+   * same direction as the order of the array.
+   */
   public Color getFieldSensorColor() {
     int phaseChange = ColorWheelConstants.colorWheel90DegreePhaseChange;
     Color currentColor = getCurrentColor();
