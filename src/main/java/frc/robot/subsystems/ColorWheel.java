@@ -18,11 +18,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ColorWheelConstants;
 
 public class ColorWheel extends SubsystemBase {
+  private static final Color[] colorArray = new Color[] {
+    ColorWheelConstants.redColor,
+    ColorWheelConstants.greenColor,
+    ColorWheelConstants.blueColor,
+    ColorWheelConstants.yellowColor
+  };
   private VictorSPX manipulatorMotor;
   private Servo manipulatorServo;
   private ColorSensorV3 colorSensor;
   private ColorMatch colorMatcher;
-  Color[] colorArray;
   /**
    * Creates a new ColorWheel.
    */
@@ -34,17 +39,32 @@ public class ColorWheel extends SubsystemBase {
 
     manipulatorServo.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
 
-    colorArray = new Color[] {
-      ColorWheelConstants.redColor,
-      ColorWheelConstants.greenColor,
-      ColorWheelConstants.blueColor,
-      ColorWheelConstants.yellowColor
-    };
-
     for(int i = 0; i < colorArray.length; i++) {
       colorMatcher.addColorMatch(colorArray[i]);
     }
 
+  }
+
+  /*
+   * Convert a String Color Code (such as from GameData) to a Color object for matter matching
+   */
+  public static Color stringToColor(String colorCode) {
+    switch (colorCode) {
+      case "R":
+      case "r":
+        return ColorWheelConstants.redColor;
+      case "G":
+      case "g":
+        return ColorWheelConstants.greenColor;
+      case "B":
+      case "b":
+        return ColorWheelConstants.blueColor;
+      case "Y":
+      case "y":
+        return ColorWheelConstants.yellowColor;
+      default:
+        return null; // No Match...
+    }
   }
 
   public void raiseManipulator() {
