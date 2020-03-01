@@ -27,7 +27,7 @@ public final class Constants {
 
     public static final class OverrideControllerConstants {
         public static final int overrideControllerPort = 1;
-        public static final int launcherSpeedAxis = 1;
+        public static final int launcherSpeedAxis = 0;
         public static final int launcherSpeedButton = 1;
         public static final int launcherVelocityButton = 2;
         public static final int raiseCPManipulatorButton = 3;
@@ -50,15 +50,15 @@ public final class Constants {
     }
 
     public static final class BallIntakeConstants {
-        public static final int intakeMotor = 0;
-        public static final double intakeSpeed = 0.5;
-        public static final double exhaustSpeed = -0.5;
+        public static final int intakeMotor = 9;
+        public static final double intakeSpeed = 0.7;
+        public static final double exhaustSpeed = -0.7;
         public static final double stopSpeed = 0.0;
     }
 
     public static final class ConveyorConstants {
 
-        public static final int conveyorMotor = 0;
+        public static final int conveyorMotor = 8;
         public static final int initialConveyorSensor = 0;
         public static final int finalConveyorSensor = 1;
         public static final int launcherConveyorSensor = 2;
@@ -69,8 +69,8 @@ public final class Constants {
     }
 
     public static final class LauncherConstants {
-        public static final int rightLaunchMotor = 1;
-        public static final int leftLaunchMotor = 2; 
+        public static final int leftLaunchMotor = 5;
+        public static final int rightLaunchMotor = 6;
         public static final double proportialPIDConstant = 1.0;
         public static final double integralPIDConstant = 0.0;
         public static final double derivativePIDConstant = 0.0;
@@ -78,7 +78,7 @@ public final class Constants {
         public static final double feedForwardPIDConstant = 0.0;
         public static final double maxPIDOutput = 1.0;
         public static final double minPIDOutput = -1.0;
-        public static final double velocityPIDTolerance = 10; 
+        public static final double velocityPIDTolerance = 10;
     }
 
     public static final class CameraConstants {

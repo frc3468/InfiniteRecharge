@@ -16,6 +16,7 @@ import frc.robot.commands.AdvanceConveyor;
 import frc.robot.commands.IntakeBallIntake;
 import frc.robot.commands.ExhaustBallIntake;
 import frc.robot.commands.SetLauncherVelocity;
+import frc.robot.commands.StopConveyor;
 import frc.robot.commands.RetreatConveyor;
 import frc.robot.commands.SetLauncherSpeed;
 import frc.robot.commands.CartesianDrive;
@@ -56,6 +57,7 @@ public class RobotContainer {
 
     drivetrain.setDefaultCommand(new CartesianDrive(drivetrain, () -> driverController.getX(Hand.kLeft),
         () -> driverController.getY(Hand.kLeft), () -> driverController.getX(Hand.kRight)));
+    conveyor.setDefaultCommand(new StopConveyor(conveyor));
   }
 
   /*

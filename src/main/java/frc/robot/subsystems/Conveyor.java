@@ -7,8 +7,8 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,7 +16,7 @@ import frc.robot.Constants.ConveyorConstants;
 
 public class Conveyor extends SubsystemBase {
 
-  private TalonSRX conveyorMotor;
+  private CANSparkMax conveyorMotor;
   private DigitalInput initialConveyorSensor;
   private DigitalInput finalConveyorSensor;
   private DigitalInput launcherConveyorSensor;
@@ -25,35 +25,36 @@ public class Conveyor extends SubsystemBase {
    */
   public Conveyor() {
 
-    conveyorMotor = new TalonSRX(ConveyorConstants.conveyorMotor);
+    conveyorMotor = new CANSparkMax(ConveyorConstants.conveyorMotor, MotorType.kBrushless);
     initialConveyorSensor = new DigitalInput(ConveyorConstants.initialConveyorSensor);
     finalConveyorSensor = new DigitalInput(ConveyorConstants.finalConveyorSensor);
     launcherConveyorSensor = new DigitalInput(ConveyorConstants.launcherConveyorSensor);
 
+    conveyorMotor.setInverted(true);
   }
 
   public void advance() {
-    conveyorMotor.set(ControlMode.PercentOutput, ConveyorConstants.conveyorMotorAdvanceSpeed);
+    conveyorMotor.set(ConveyorConstants.conveyorMotorAdvanceSpeed);
   }
 
   public void retreat() {
-    conveyorMotor.set(ControlMode.PercentOutput, ConveyorConstants.conveyorMotorRetreatSpeed);
+    conveyorMotor.set(ConveyorConstants.conveyorMotorRetreatSpeed);
   }
 
   public void stop() {
-    conveyorMotor.set(ControlMode.PercentOutput, ConveyorConstants.conveyorMotorStopSpeed);
+    conveyorMotor.set(ConveyorConstants.conveyorMotorStopSpeed);
   }
 
   public boolean getInitialConveyorSensor() {
-    return initialConveyorSensor.get();
+    return !initialConveyorSensor.get();
   }
 
   public boolean getFinalConveyorSensor() {
-    return finalConveyorSensor.get();
+    return !finalConveyorSensor.get();
   }
 
   public boolean getLauncherConveyorSensor() {
-    return launcherConveyorSensor.get();
+    return !launcherConveyorSensor.get();
   }
 
   @Override
