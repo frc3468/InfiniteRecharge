@@ -17,6 +17,8 @@ import frc.robot.commands.IntakeBallIntake;
 import frc.robot.commands.ExhaustBallIntake;
 import frc.robot.commands.SetLauncherVelocity;
 import frc.robot.commands.StopConveyor;
+import frc.robot.commands.StopIntake;
+import frc.robot.commands.StopLauncher;
 import frc.robot.commands.RetreatConveyor;
 import frc.robot.commands.SetLauncherSpeed;
 import frc.robot.commands.CartesianDrive;
@@ -24,6 +26,7 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.BallIntake;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Launcher;
+import sun.launcher.resources.launcher;
 import frc.robot.subsystems.Camera;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -57,7 +60,10 @@ public class RobotContainer {
 
     drivetrain.setDefaultCommand(new CartesianDrive(drivetrain, () -> driverController.getX(Hand.kLeft),
         () -> driverController.getY(Hand.kLeft), () -> driverController.getX(Hand.kRight)));
+    ballIntake.setDefaultCommand(new StopIntake(ballIntake));
     conveyor.setDefaultCommand(new StopConveyor(conveyor));
+    launcher.setDefaultCommand(new StopLauncher(launcher));
+    
   }
 
   /*
