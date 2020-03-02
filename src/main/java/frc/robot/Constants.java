@@ -21,8 +21,8 @@ public final class Constants {
 
     public static final class DriverControllerConstants {
         public static final int driverControllerPort = 0;
-        public static final int intakeButton = XboxController.Button.kA.value;
-        public static final int launchButton = XboxController.Button.kB.value;
+        public static final int intakeButton = XboxController.Button.kBumperLeft.value;
+        public static final int launchButton = XboxController.Button.kBumperRight.value;
     }
 
     public static final class OverrideControllerConstants {
