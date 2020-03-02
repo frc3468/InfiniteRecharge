@@ -12,6 +12,8 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.LauncherConstants;
 
@@ -88,6 +90,10 @@ public class Launcher extends SubsystemBase {
 
   @Override
   public void periodic() {
+
+    SmartDashboard.putNumber("Left Velocity", leftMotorEncoder.getVelocity());
+    SmartDashboard.putNumber("Right Velocity", rightMotorEncoder.getVelocity());
+    SmartDashboard.putNumber("Average Velocity", getVelocity());
     // This method will be called once per scheduler run
   }
 }

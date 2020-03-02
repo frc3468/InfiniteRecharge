@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ConveyorConstants;
 
@@ -59,6 +60,10 @@ public class Conveyor extends SubsystemBase {
 
   @Override
   public void periodic() {
+
+    SmartDashboard.putBoolean("Intake Sensor", !initialConveyorSensor.get());
+    SmartDashboard.putBoolean("Conveyor Sensor", !finalConveyorSensor.get());
+    SmartDashboard.putBoolean("Launcher Sensor", !launcherConveyorSensor.get());
     // This method will be called once per scheduler run
   }
 }
