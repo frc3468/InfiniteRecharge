@@ -123,7 +123,7 @@ public class RobotContainer {
     setLauncherVelocityOverrideButton
         .whileHeld(new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
     setLauncherSpeedOverrideButton.whileHeld(new SetLauncherSpeed(launcher,
-        () -> overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis)));
+        () -> map(overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis), -1.0, 1.0, 0.0, 1.0)));
 
   }
 
@@ -136,4 +136,9 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     return null;
   }
+
+  private double map(double x, double in_min, double in_max, double out_min, double out_max) {
+
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+  } 
 }
