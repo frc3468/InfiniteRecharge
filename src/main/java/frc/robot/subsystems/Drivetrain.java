@@ -29,7 +29,6 @@ public class Drivetrain extends SubsystemBase {
     rearLeftDriveMotor = new CANSparkMax(DrivetrainConstants.rearLeftDriveMotor, MotorType.kBrushless);
     frontRightDriveMotor = new CANSparkMax(DrivetrainConstants.frontRightDriveMotor, MotorType.kBrushless);
     rearRightDriveMotor = new CANSparkMax(DrivetrainConstants.rearRightDriveMotor, MotorType.kBrushless);
-    //
     robotDrive = new MecanumDrive(frontLeftDriveMotor, rearLeftDriveMotor, frontRightDriveMotor, rearRightDriveMotor); 
     navX = new AHRS();
   }

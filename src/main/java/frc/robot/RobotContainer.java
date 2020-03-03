@@ -16,6 +16,9 @@ import frc.robot.commands.AdvanceConveyor;
 import frc.robot.commands.IntakeBallIntake;
 import frc.robot.commands.ExhaustBallIntake;
 import frc.robot.commands.SetLauncherVelocity;
+import frc.robot.commands.StopConveyor;
+import frc.robot.commands.StopIntake;
+import frc.robot.commands.StopLauncher;
 import frc.robot.commands.RetreatConveyor;
 import frc.robot.commands.SetLauncherSpeed;
 import frc.robot.commands.CartesianDrive;
@@ -58,6 +61,10 @@ public class RobotContainer {
 
     drivetrain.setDefaultCommand(new CartesianDrive(drivetrain, () -> driverController.getX(Hand.kLeft),
         () -> driverController.getY(Hand.kLeft), () -> driverController.getX(Hand.kRight)));
+    ballIntake.setDefaultCommand(new StopIntake(ballIntake));
+    conveyor.setDefaultCommand(new StopConveyor(conveyor));
+    launcher.setDefaultCommand(new StopLauncher(launcher));
+
   }
 
   /*
@@ -118,7 +125,7 @@ public class RobotContainer {
     setLauncherVelocityOverrideButton
         .whileHeld(new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
     setLauncherSpeedOverrideButton.whileHeld(new SetLauncherSpeed(launcher,
-        () -> overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis)));
+        () -> map(overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis), -1.0, 1.0, 0.0, 1.0)));
 
   }
 
@@ -131,4 +138,9 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     return null;
   }
+
+  private double map(double x, double in_min, double in_max, double out_min, double out_max) {
+
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+  } 
 }

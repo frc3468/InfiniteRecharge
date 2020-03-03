@@ -19,7 +19,7 @@ public class SetLauncherSpeed extends CommandBase {
    */
   public SetLauncherSpeed(Launcher subsystem, DoubleSupplier speedSouce) {
     launcher = subsystem;
-    speedSouce = speed; 
+    speed = speedSouce;
     addRequirements(launcher);
     // Use addRequirements() here to declare subsystem dependencies.
   }

@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.BallIntakeConstants;
@@ -17,10 +17,10 @@ public class BallIntake extends SubsystemBase {
   /*
    * Creates a new BallIntake.
    */
-  public TalonSRX intakeMotor;
+  public VictorSPX intakeMotor;
 
   public BallIntake() {
-    intakeMotor = new TalonSRX(BallIntakeConstants.intakeMotor);
+    intakeMotor = new VictorSPX(BallIntakeConstants.intakeMotor);
   }
   public void intake() {
     intakeMotor.set(ControlMode.PercentOutput, BallIntakeConstants.intakeSpeed);
