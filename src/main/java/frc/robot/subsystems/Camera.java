@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CameraConstants;
 
@@ -62,6 +63,7 @@ public class Camera extends SubsystemBase {
 
   @Override
   public final void periodic() {
+    SmartDashboard.putNumber("Distance from goal", getDistanceFromGoal());
     // This method will be called once per scheduler run
 
     
