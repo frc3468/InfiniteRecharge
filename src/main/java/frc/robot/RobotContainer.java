@@ -105,8 +105,8 @@ public class RobotContainer {
         .whileActiveContinuous(new AdvanceConveyor(conveyor));
 
     // Launcher
-    launchButton.or(setLauncherVelocityOverrideButton).whileActiveContinuous(
-        new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
+    //launchButton.or(setLauncherVelocityOverrideButton).whileActiveContinuous(
+    //    new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
     launchButton.and(launcherOnTarget).whileActiveContinuous(new AdvanceConveyor(conveyor));
     launchButton.and(launcherOnTarget.negate().and(launcherConveyorDetector.negate()))
         .whileActiveContinuous(new AdvanceConveyor(conveyor));

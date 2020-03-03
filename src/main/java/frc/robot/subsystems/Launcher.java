@@ -52,6 +52,7 @@ public class Launcher extends SubsystemBase {
     rightPIDController.setIZone(LauncherConstants.integralPIDConstant);
     rightPIDController.setFF(LauncherConstants.feedForwardPIDConstant);
     rightPIDController.setOutputRange(LauncherConstants.maxPIDOutput, LauncherConstants.minPIDOutput);
+    setVelocity(0.0);
   }  
 
   public void setVelocity(double velocity) {
@@ -62,7 +63,8 @@ public class Launcher extends SubsystemBase {
 
   public void setSpeed(double speed) {
     leftLaunchMotor.set(speed);
-    rightLaunchMotor.set(speed);
+    targetVelocity = leftMotorEncoder.getVelocity();
+    rightPIDController.setReference(targetVelocity, ControlType.kVelocity);
   }
 
   public void stop() {
@@ -90,10 +92,11 @@ public class Launcher extends SubsystemBase {
 
   @Override
   public void periodic() {
-
     SmartDashboard.putNumber("Left Velocity", leftMotorEncoder.getVelocity());
     SmartDashboard.putNumber("Right Velocity", rightMotorEncoder.getVelocity());
     SmartDashboard.putNumber("Average Velocity", getVelocity());
+    SmartDashboard.putBoolean("Launcher On Target", isOnTarget());
+    SmartDashboard.putNumber("Target Velocity", targetVelocity);
     // This method will be called once per scheduler run
   }
 }
