@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorSensorV3;
@@ -25,7 +26,7 @@ public class ColorWheel extends SubsystemBase {
     ColorWheelConstants.yellowColor
   };
   private VictorSPX manipulatorMotor;
-  private Servo manipulatorServo;
+  private TalonSRX manipulatorArm;
   private ColorSensorV3 colorSensor;
   private ColorMatch colorMatcher;
   /**
@@ -33,11 +34,9 @@ public class ColorWheel extends SubsystemBase {
    */
   public ColorWheel() {
     manipulatorMotor = new VictorSPX(ColorWheelConstants.manipulatorMotor);
-    manipulatorServo = new Servo(ColorWheelConstants.manipulatorServo);
+    manipulatorArm = new TalonSRX(ColorWheelConstants.manipulatorArmMotor);
     colorSensor = new ColorSensorV3(ColorWheelConstants.colorSensorPort);
     colorMatcher = new ColorMatch();
-
-    manipulatorServo.setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
 
     for(int i = 0; i < colorArray.length; i++) {
       colorMatcher.addColorMatch(colorArray[i]);
@@ -68,11 +67,15 @@ public class ColorWheel extends SubsystemBase {
   }
 
   public void raiseManipulator() {
-    manipulatorServo.setPosition(ColorWheelConstants.manipulatorRaisedPosition);
+    manipulatorArm.set(ControlMode.PercentOutput, ColorWheelConstants.manipulatorArmForwardSpeed);
   }
 
   public void stowManipulator() {
-    manipulatorServo.setPosition(ColorWheelConstants.manipulatorStowedPosition);
+    manipulatorArm.set(ControlMode.PercentOutput, ColorWheelConstants.manipulatorArmReverseSpeed);
+  }
+
+  public void stopManipulator() {
+    manipulatorArm.set(ControlMode.PercentOutput, ColorWheelConstants.manipulatorArmStopSpeed);
   }
 
   public void advance() {
@@ -81,6 +84,10 @@ public class ColorWheel extends SubsystemBase {
 
   public void reverse() {
     manipulatorMotor.set(ControlMode.PercentOutput, ColorWheelConstants.manipulatorReverseSpeed);
+  }
+
+  public void stop() {
+    manipulatorMotor.set(ControlMode.PercentOutput, ColorWheelConstants.manipulatorStopSpeed);
   }
 
   public Color getCurrentColor() {

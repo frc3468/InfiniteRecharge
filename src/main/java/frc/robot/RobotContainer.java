@@ -16,6 +16,7 @@ import frc.robot.commands.AdvanceConveyor;
 import frc.robot.commands.IntakeBallIntake;
 import frc.robot.commands.ExhaustBallIntake;
 import frc.robot.commands.SetLauncherVelocity;
+import frc.robot.commands.StopColorWheel;
 import frc.robot.commands.StopConveyor;
 import frc.robot.commands.StopIntake;
 import frc.robot.commands.StopLauncher;
@@ -64,7 +65,7 @@ public class RobotContainer {
     ballIntake.setDefaultCommand(new StopIntake(ballIntake));
     conveyor.setDefaultCommand(new StopConveyor(conveyor));
     launcher.setDefaultCommand(new StopLauncher(launcher));
-
+    colorWheel.setDefaultCommand(new StopColorWheel(colorWheel));
   }
 
   /*
