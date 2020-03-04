@@ -66,15 +66,15 @@ public class ColorWheel extends SubsystemBase {
     }
   }
 
-  public void raiseManipulator() {
+  public void raiseArm() {
     manipulatorArm.set(ControlMode.PercentOutput, ColorWheelConstants.manipulatorArmForwardSpeed);
   }
 
-  public void stowManipulator() {
+  public void stowArm() {
     manipulatorArm.set(ControlMode.PercentOutput, ColorWheelConstants.manipulatorArmReverseSpeed);
   }
 
-  public void stopManipulator() {
+  public void stopArm() {
     manipulatorArm.set(ControlMode.PercentOutput, ColorWheelConstants.manipulatorArmStopSpeed);
   }
 

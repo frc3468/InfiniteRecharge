@@ -37,7 +37,7 @@ public final class Constants {
         public static final int raiseCPManipulatorButton = 3;
         public static final int raiseLiftHookButton = 4;
         public static final int advanceCPManipulatorButton = 5;
-        public static final int regressCPManipulatorButton = 6;
+        public static final int reverseCPManipulatorButton = 6;
         public static final int advanceLiftWinchButton = 7;
         public static final int regressLiftWinchButton = 8;
         public static final int advanceConveyorButton = 9;

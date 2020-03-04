@@ -10,12 +10,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ColorWheel;
 
-public class StopColorWheel extends CommandBase {
+public class ReverseColorWheel extends CommandBase {
   private ColorWheel colorWheel;
   /**
-   * Creates a new StopColorWheel.
+   * Creates a new ReverseColorWheel.
    */
-  public StopColorWheel(ColorWheel subsystem) {
+  public ReverseColorWheel(ColorWheel subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     colorWheel = subsystem;
     addRequirements(colorWheel);
@@ -29,13 +29,13 @@ public class StopColorWheel extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    colorWheel.stop();
-    colorWheel.stopArm();
+    colorWheel.reverse();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    colorWheel.stop();
   }
 
   // Returns true when the command should end.
