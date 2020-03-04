@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -29,6 +30,10 @@ public class Drivetrain extends SubsystemBase {
     rearLeftDriveMotor = new CANSparkMax(DrivetrainConstants.rearLeftDriveMotor, MotorType.kBrushless);
     frontRightDriveMotor = new CANSparkMax(DrivetrainConstants.frontRightDriveMotor, MotorType.kBrushless);
     rearRightDriveMotor = new CANSparkMax(DrivetrainConstants.rearRightDriveMotor, MotorType.kBrushless);
+    frontLeftDriveMotor.setIdleMode(IdleMode.kCoast);
+    rearLeftDriveMotor.setIdleMode(IdleMode.kCoast);
+    frontRightDriveMotor.setIdleMode(IdleMode.kCoast);
+    rearRightDriveMotor.setIdleMode(IdleMode.kCoast);
     robotDrive = new MecanumDrive(frontLeftDriveMotor, rearLeftDriveMotor, frontRightDriveMotor, rearRightDriveMotor); 
     navX = new AHRS();
   }
