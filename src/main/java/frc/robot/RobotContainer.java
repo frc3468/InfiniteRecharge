@@ -12,14 +12,19 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.Constants.DriverControllerConstants;
 import frc.robot.Constants.OverrideControllerConstants;
+import frc.robot.commands.AdvanceColorWheel;
 import frc.robot.commands.AdvanceConveyor;
 import frc.robot.commands.IntakeBallIntake;
+import frc.robot.commands.RaiseColorWheelArm;
 import frc.robot.commands.ExhaustBallIntake;
 import frc.robot.commands.SetLauncherVelocity;
+import frc.robot.commands.StopColorWheel;
 import frc.robot.commands.StopConveyor;
 import frc.robot.commands.StopIntake;
 import frc.robot.commands.StopLauncher;
+import frc.robot.commands.StowColorWheelArm;
 import frc.robot.commands.RetreatConveyor;
+import frc.robot.commands.ReverseColorWheel;
 import frc.robot.commands.SetLauncherSpeed;
 import frc.robot.commands.CartesianDrive;
 import frc.robot.subsystems.Drivetrain;
@@ -27,6 +32,7 @@ import frc.robot.subsystems.BallIntake;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.Camera;
+import frc.robot.subsystems.ColorWheel;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -45,6 +51,7 @@ public class RobotContainer {
   private final Conveyor conveyor = new Conveyor();
   private final Launcher launcher = new Launcher();
   private final Camera camera = new Camera();
+  private final ColorWheel colorWheel = new ColorWheel();
 
   XboxController driverController = new XboxController(DriverControllerConstants.driverControllerPort);
   Joystick overrideController = new Joystick(OverrideControllerConstants.overrideControllerPort);
@@ -62,7 +69,7 @@ public class RobotContainer {
     ballIntake.setDefaultCommand(new StopIntake(ballIntake));
     conveyor.setDefaultCommand(new StopConveyor(conveyor));
     launcher.setDefaultCommand(new StopLauncher(launcher));
-
+    colorWheel.setDefaultCommand(new StopColorWheel(colorWheel));
   }
 
   /*
@@ -89,6 +96,12 @@ public class RobotContainer {
         OverrideControllerConstants.launcherVelocityButton);
     JoystickButton setLauncherSpeedOverrideButton = new JoystickButton(overrideController,
         OverrideControllerConstants.launcherSpeedButton);
+    JoystickButton raiseColorWheelArmOverrideButton = new JoystickButton(overrideController, 
+        OverrideControllerConstants.raiseCPManipulatorButton);
+    JoystickButton advanceColorWheelOverridebutton = new JoystickButton(overrideController, 
+        OverrideControllerConstants.advanceCPManipulatorButton);
+    JoystickButton reverseColorWheelOverridebutton = new JoystickButton(overrideController, 
+        OverrideControllerConstants.reverseCPManipulatorButton);
 
     // Internal Robot Triggers
     Trigger initialConveyorDetector = new Trigger(() -> conveyor.getInitialConveyorSensor());
@@ -124,6 +137,14 @@ public class RobotContainer {
         .whileHeld(new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
     setLauncherSpeedOverrideButton.whileHeld(new SetLauncherSpeed(launcher,
         () -> map(overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis), -1.0, 1.0, 0.0, 1.0)));
+    
+    // ColorWheel Override
+    raiseColorWheelArmOverrideButton
+        .whenPressed(new RaiseColorWheelArm(colorWheel).withTimeout(0.5))
+        .whenReleased(new StowColorWheelArm(colorWheel).withTimeout(0.5));
+    advanceColorWheelOverridebutton.whileHeld(new AdvanceColorWheel(colorWheel));
+    reverseColorWheelOverridebutton.whileHeld(new ReverseColorWheel(colorWheel));
+
 
   }
 
