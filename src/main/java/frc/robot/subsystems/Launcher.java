@@ -44,15 +44,15 @@ public class Launcher extends SubsystemBase {
     leftPIDController.setD(LauncherConstants.derivativePIDConstant);
     leftPIDController.setIZone(LauncherConstants.integralPIDConstant);
     leftPIDController.setFF(LauncherConstants.feedForwardPIDConstant);
-    leftPIDController.setOutputRange(LauncherConstants.maxPIDOutput, LauncherConstants.minPIDOutput);
+    leftPIDController.setOutputRange(LauncherConstants.minPIDOutput, LauncherConstants.maxPIDOutput);
 
     rightPIDController.setP(LauncherConstants.proportialPIDConstant);
     rightPIDController.setI(LauncherConstants.integralPIDConstant);
     rightPIDController.setD(LauncherConstants.derivativePIDConstant);
     rightPIDController.setIZone(LauncherConstants.integralPIDConstant);
     rightPIDController.setFF(LauncherConstants.feedForwardPIDConstant);
-    rightPIDController.setOutputRange(LauncherConstants.maxPIDOutput, LauncherConstants.minPIDOutput);
-    setVelocity(0.0);
+    rightPIDController.setOutputRange(LauncherConstants.minPIDOutput, LauncherConstants.maxPIDOutput);
+    stop();
   }  
 
   public void setVelocity(double velocity) {
@@ -63,8 +63,7 @@ public class Launcher extends SubsystemBase {
 
   public void setSpeed(double speed) {
     leftLaunchMotor.set(speed);
-    targetVelocity = leftMotorEncoder.getVelocity();
-    rightPIDController.setReference(targetVelocity, ControlType.kVelocity);
+    rightLaunchMotor.set(speed);
   }
 
   public void stop() {

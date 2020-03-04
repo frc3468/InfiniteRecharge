@@ -122,8 +122,8 @@ public class RobotContainer {
     // Launcher Override
     setLauncherVelocityOverrideButton
         .whileHeld(new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
-    setLauncherSpeedOverrideButton.whileHeld(new SetLauncherSpeed(launcher,
-        () -> map(overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis), -1.0, 1.0, 0.0, 1.0)));
+    setLauncherSpeedOverrideButton.whileHeld(new SetLauncherVelocity(launcher,
+        () -> map(overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis), -1.0, 1.0, 0.0, 5000.0)));
 
   }
 

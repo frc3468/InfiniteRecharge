@@ -71,13 +71,13 @@ public final class Constants {
     public static final class LauncherConstants {
         public static final int leftLaunchMotor = 5;
         public static final int rightLaunchMotor = 6;
-        public static final double proportialPIDConstant = 1.0;
-        public static final double integralPIDConstant = 0.0;
+        public static final double proportialPIDConstant = 0.0005;
+        public static final double integralPIDConstant = 100.0;
         public static final double derivativePIDConstant = 0.0;
-        public static final double integralPIDZone = 0.0;
+        public static final double integralPIDZone = 1500.0;
         public static final double feedForwardPIDConstant = 0.0;
         public static final double maxPIDOutput = 1.0;
-        public static final double minPIDOutput = -1.0;
+        public static final double minPIDOutput = 0.0;
         public static final double velocityPIDTolerance = 10;
     }
 
