@@ -107,4 +107,13 @@ public final class Constants {
         public static final int colorWheel90DegreePhaseChange = 2; // 2 color changes in 90deg
     }
 
+    public static final class LiftConstants{
+        public static final int winchMotor = 7;
+        public static final int hookMotor = 12;
+        public static final double winchUpSpeed = 0.7;
+        public static final double winchDownSpeed = -0.7;        
+        public static final double hookUpSpeed = 0.7;
+        public static final double hookDownSpeed = -0.7;
+    }
+
 }
