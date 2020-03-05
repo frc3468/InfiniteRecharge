@@ -88,6 +88,7 @@ public final class Constants {
     public static final class CameraConstants {
         public static final String chameleonVisionTableName = "chameleon-vision";
         public static final String cameraTableName = "goal cam";
+        public static final int lightRelay = 0;
     }
 
     public static final class ColorWheelConstants {
@@ -114,6 +115,8 @@ public final class Constants {
         public static final double winchDownSpeed = -0.7;        
         public static final double hookUpSpeed = 0.7;
         public static final double hookDownSpeed = -0.7;
+        public static final int winchCurrentLimit = 40;
+        public static final int canTimeout = 10;
     }
 
 }

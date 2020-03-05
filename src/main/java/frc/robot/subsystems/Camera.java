@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CameraConstants;
@@ -25,10 +27,15 @@ public class Camera extends SubsystemBase {
   private NetworkTableEntry cameraPitch; 
   private NetworkTableEntry cameraYaw;
 
+  private Relay light;
+
   /**
    * Creates a new ExampleSubsystem.
    */
   public Camera() {
+
+    light = new Relay(CameraConstants.lightRelay);
+
     cameraTable = NetworkTableInstance.getDefault()
       .getTable(CameraConstants.chameleonVisionTableName)
       .getSubTable(CameraConstants.cameraTableName
@@ -40,6 +47,8 @@ public class Camera extends SubsystemBase {
     targetArea = cameraTable.getEntry("targetArea");
     cameraPitch = cameraTable.getEntry("targetPitch");
     cameraYaw = cameraTable.getEntry("targetYaw");
+
+    cameraTable.getEntry("driver_mode").setBoolean(true);
   }
 
   public double getDistanceFromGoal(){
@@ -59,6 +68,14 @@ public class Camera extends SubsystemBase {
 
   public boolean isValid(){
     return validTarget.getBoolean(false);
+  }
+
+  public void lightOn(){
+    light.set(Value.kOn);
+  }
+
+  public void lightOff(){
+    light.set(Value.kOff);
   }
 
   @Override

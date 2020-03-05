@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -23,6 +25,11 @@ public class Lift extends SubsystemBase {
   public Lift() {
     winchMotor = new CANSparkMax(LiftConstants.winchMotor, MotorType.kBrushless);
     hookMotor = new TalonSRX(LiftConstants.hookMotor);
+
+    winchMotor.setSmartCurrentLimit(LiftConstants.winchCurrentLimit);
+
+    hookMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, LiftConstants.canTimeout);
+    hookMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, LiftConstants.canTimeout);
   }
   
   public void liftUpWinch() {
