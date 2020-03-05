@@ -95,11 +95,11 @@ public final class Constants {
         public static final int manipulatorArmMotor = 11;
         public static final I2C.Port colorSensorPort = I2C.Port.kOnboard;
         public static final double manipulatorForwardSpeed = 0.2;
-        public static final double manipulatorReverseSpeed = 0.2;
-        public static final double manipulatorStopSpeed = 0.2;
-        public static final double manipulatorArmForwardSpeed = 0.2;
-        public static final double manipulatorArmReverseSpeed = -0.2;
-        public static final double manipulatorArmStopSpeed = -0.2;
+        public static final double manipulatorReverseSpeed = -0.2;
+        public static final double manipulatorStopSpeed = 0.0;
+        public static final double manipulatorArmForwardSpeed = 0.3;
+        public static final double manipulatorArmReverseSpeed = -0.3;
+        public static final double manipulatorArmStopSpeed = 0.0;
         public static final Color blueColor = ColorMatch.makeColor(0.143, 0.427, 0.429);
         public static final Color greenColor = ColorMatch.makeColor(0.197, 0.561, 0.240);
         public static final Color redColor = ColorMatch.makeColor(0.561, 0.232, 0.114);

@@ -140,8 +140,8 @@ public class RobotContainer {
     
     // ColorWheel Override
     raiseColorWheelArmOverrideButton
-        .whenPressed(new RaiseColorWheelArm(colorWheel).withTimeout(0.5))
-        .whenReleased(new StowColorWheelArm(colorWheel).withTimeout(0.5));
+        .whenPressed(new RaiseColorWheelArm(colorWheel).withTimeout(1.5))
+        .whenReleased(new StowColorWheelArm(colorWheel).withTimeout(1.5));
     advanceColorWheelOverridebutton.whileHeld(new AdvanceColorWheel(colorWheel));
     reverseColorWheelOverridebutton.whileHeld(new ReverseColorWheel(colorWheel));
 

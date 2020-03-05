@@ -38,6 +38,8 @@ public class ColorWheel extends SubsystemBase {
     colorSensor = new ColorSensorV3(ColorWheelConstants.colorSensorPort);
     colorMatcher = new ColorMatch();
 
+    manipulatorArm.setInverted(true);
+
     for(int i = 0; i < colorArray.length; i++) {
       colorMatcher.addColorMatch(colorArray[i]);
     }
