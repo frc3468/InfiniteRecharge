@@ -71,7 +71,7 @@ public class Camera extends SubsystemBase {
   }
 
   public void lightOn(){
-    light.set(Value.kOn);
+    light.set(Value.kForward);
   }
 
   public void lightOff(){

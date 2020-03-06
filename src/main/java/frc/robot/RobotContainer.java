@@ -154,7 +154,8 @@ public class RobotContainer {
         .whileHeld(new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
     setLauncherSpeedOverrideButton.whileHeld(new SetLauncherVelocity(launcher,
         () -> map(overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis), -1.0, 1.0, 0.0, 5000.0)));
-    setLauncherVelocityOverrideButton.whenPressed(new CameraLightOn(camera)).whenReleased(new CameraLightOff(camera));    
+    setLauncherVelocityOverrideButton.whenPressed(new CameraLightOn(camera)).whenReleased(new CameraLightOff(camera));  
+    setLauncherSpeedOverrideButton.whenPressed(new CameraLightOn(camera)).whenReleased(new CameraLightOff(camera));  
 
     // ColorWheel Override
     raiseColorWheelArmOverrideButton
@@ -164,10 +165,14 @@ public class RobotContainer {
     reverseColorWheelOverridebutton.whileHeld(new ReverseColorWheel(colorWheel));
 
     // Lift Override
-    ascendHookOverrideButton.whileActiveContinuous(new AscendHook(lift));
-    ascendHookOverrideButton.whenReleased(new DescendHook(lift));
-    ascendWinchOverrideButton.whileActiveContinuous(new AscendWinch(lift));
-    descendWinchOverrideButton.whileActiveContinuous(new DescendWinch(lift));
+    // ascendHookOverrideButton.whenPressed(new AscendHook(lift));
+    // ascendHookOverrideButton.whenReleased(new DescendHook(lift));
+    // ascendWinchOverrideButton.whileActiveContinuous(new AscendWinch(lift));
+    // descendWinchOverrideButton.whileActiveContinuous(new DescendWinch(lift));
+    ascendHookOverrideButton.negate().and(ascendWinchOverrideButton).whileActiveOnce(new AscendHook(lift));
+    ascendHookOverrideButton.negate().and(descendWinchOverrideButton).whileActiveOnce(new DescendHook(lift));
+    ascendHookOverrideButton.and(ascendWinchOverrideButton).whileActiveOnce(new AscendWinch(lift));
+    ascendHookOverrideButton.and(descendWinchOverrideButton).whileActiveOnce(new DescendWinch(lift));
   }
 
   /**
