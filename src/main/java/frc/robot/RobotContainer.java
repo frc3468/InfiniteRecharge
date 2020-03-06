@@ -123,7 +123,7 @@ public class RobotContainer {
     Trigger initialConveyorDetector = new Trigger(() -> conveyor.getInitialConveyorSensor());
     Trigger finalConveyorDetector = new Trigger(() -> conveyor.getFinalConveyorSensor());
     Trigger launcherConveyorDetector = new Trigger(() -> conveyor.getLauncherConveyorSensor());
-    Trigger launcherOnTarget = new Trigger(() -> launcher.isOnTarget());
+    Trigger launcherOnTarget = new Trigger(() -> launcher.isOnTargetAverage(7));
 
     // Intake
     intakeButton.and(finalConveyorDetector.or(launcherConveyorDetector).negate())
