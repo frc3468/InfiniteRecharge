@@ -114,8 +114,8 @@ public final class Constants {
         public static final int hookMotor = 12;
         public static final double winchUpSpeed = 1.0;
         public static final double winchDownSpeed = -1.0;        
-        public static final double hookUpSpeed = 0.7;
-        public static final double hookDownSpeed = -0.7;
+        public static final double hookUpSpeed = 1.0;
+        public static final double hookDownSpeed = -1.0;
         public static final int winchCurrentLimit = 60;
         public static final int canTimeout = 10;
     }

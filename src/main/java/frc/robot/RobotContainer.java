@@ -16,6 +16,7 @@ import frc.robot.commands.AdvanceColorWheel;
 import frc.robot.commands.AdvanceConveyor;
 import frc.robot.commands.AscendHook;
 import frc.robot.commands.AscendWinch;
+import frc.robot.commands.Auto;
 import frc.robot.commands.CameraLightOff;
 import frc.robot.commands.CameraLightOn;
 import frc.robot.commands.IntakeBallIntake;
@@ -28,6 +29,7 @@ import frc.robot.commands.StopIntake;
 import frc.robot.commands.StopLauncher;
 import frc.robot.commands.StopWinchMotor;
 import frc.robot.commands.StowColorWheelArm;
+import frc.robot.commands.AutoFolder.IndexerAuto;
 import frc.robot.commands.RetreatConveyor;
 import frc.robot.commands.ReverseColorWheel;
 import frc.robot.commands.SetLauncherSpeed;
@@ -182,7 +184,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return new Auto(launcher, conveyor, () -> launcher.isOnTargetAverage(7), drivetrain);
   }
 
   private double map(double x, double in_min, double in_max, double out_min, double out_max) {
