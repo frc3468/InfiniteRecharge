@@ -33,6 +33,8 @@ public class Lift extends SubsystemBase {
     hookMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, LiftConstants.canTimeout);
     hookMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, LiftConstants.canTimeout);
     hookMotor.setInverted(true);
+
+    winchMotor.burnFlash();
   }
   
   public void liftUpWinch() {

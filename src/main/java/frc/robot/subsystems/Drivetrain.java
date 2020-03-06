@@ -36,6 +36,11 @@ public class Drivetrain extends SubsystemBase {
     rearRightDriveMotor.setIdleMode(IdleMode.kCoast);
     robotDrive = new MecanumDrive(frontLeftDriveMotor, rearLeftDriveMotor, frontRightDriveMotor, rearRightDriveMotor); 
     navX = new AHRS();
+    
+    frontLeftDriveMotor.burnFlash();
+    rearLeftDriveMotor.burnFlash();
+    frontRightDriveMotor.burnFlash();
+    rearRightDriveMotor.burnFlash();
   }
 
   public void cartesianDrive(double magnitudey, double magnitudex, double rotation) {

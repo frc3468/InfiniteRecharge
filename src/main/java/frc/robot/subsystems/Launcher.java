@@ -54,6 +54,9 @@ public class Launcher extends SubsystemBase {
     rightPIDController.setFF(LauncherConstants.rightFeedForwardPIDConstant);
     rightPIDController.setOutputRange(LauncherConstants.minPIDOutput, LauncherConstants.maxPIDOutput);
     stop();
+
+    leftLaunchMotor.burnFlash();
+    rightLaunchMotor.burnFlash();
   }  
 
   public void setVelocity(double velocity) {
