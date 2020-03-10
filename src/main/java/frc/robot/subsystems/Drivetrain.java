@@ -11,6 +11,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DrivetrainConstants;
@@ -18,9 +20,11 @@ import frc.robot.Constants.DrivetrainConstants;
 public class Drivetrain extends SubsystemBase {
   private CANSparkMax frontLeftDriveMotor;
   private CANSparkMax rearLeftDriveMotor;
+  private SpeedControllerGroup leftSpeedControllerGroup;
   private CANSparkMax frontRightDriveMotor;
   private CANSparkMax rearRightDriveMotor;
-  private MecanumDrive robotDrive;
+  private SpeedControllerGroup rightSpeedControllerGroup;
+  private DifferentialDrive robotDrive;
   private AHRS navX;
   /**
    * Creates a new Drivetrain.
@@ -28,13 +32,15 @@ public class Drivetrain extends SubsystemBase {
   public Drivetrain() {
     frontLeftDriveMotor = new CANSparkMax(DrivetrainConstants.frontLeftDriveMotor, MotorType.kBrushless);
     rearLeftDriveMotor = new CANSparkMax(DrivetrainConstants.rearLeftDriveMotor, MotorType.kBrushless);
+    leftSpeedControllerGroup = new SpeedControllerGroup(frontLeftDriveMotor, rearLeftDriveMotor);
     frontRightDriveMotor = new CANSparkMax(DrivetrainConstants.frontRightDriveMotor, MotorType.kBrushless);
     rearRightDriveMotor = new CANSparkMax(DrivetrainConstants.rearRightDriveMotor, MotorType.kBrushless);
+    rightSpeedControllerGroup = new SpeedControllerGroup(frontRightDriveMotor, rearRightDriveMotor);
     frontLeftDriveMotor.setIdleMode(IdleMode.kCoast);
     rearLeftDriveMotor.setIdleMode(IdleMode.kCoast);
     frontRightDriveMotor.setIdleMode(IdleMode.kCoast);
     rearRightDriveMotor.setIdleMode(IdleMode.kCoast);
-    robotDrive = new MecanumDrive(frontLeftDriveMotor, rearLeftDriveMotor, frontRightDriveMotor, rearRightDriveMotor); 
+    robotDrive = new DifferentialDrive(leftSpeedControllerGroup, rightSpeedControllerGroup); 
     navX = new AHRS();
     
     frontLeftDriveMotor.burnFlash();
@@ -43,8 +49,8 @@ public class Drivetrain extends SubsystemBase {
     rearRightDriveMotor.burnFlash();
   }
 
-  public void cartesianDrive(double magnitudey, double magnitudex, double rotation) {
-    robotDrive.driveCartesian(magnitudey, magnitudex, rotation);
+  public void haloDrive(double magnitudey, double rotation) {
+    robotDrive.arcadeDrive(magnitudey, rotation);
   }
 
   public float getYaw(){

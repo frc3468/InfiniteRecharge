@@ -22,6 +22,7 @@ import frc.robot.commands.CameraLightOn;
 import frc.robot.commands.IntakeBallIntake;
 import frc.robot.commands.RaiseColorWheelArm;
 import frc.robot.commands.ExhaustBallIntake;
+import frc.robot.commands.HaloDrive;
 import frc.robot.commands.SetLauncherVelocity;
 import frc.robot.commands.StopColorWheel;
 import frc.robot.commands.StopConveyor;
@@ -32,7 +33,6 @@ import frc.robot.commands.StowColorWheelArm;
 import frc.robot.commands.RetreatConveyor;
 import frc.robot.commands.ReverseColorWheel;
 import frc.robot.commands.SetLauncherSpeed;
-import frc.robot.commands.CartesianDrive;
 import frc.robot.commands.DescendHook;
 import frc.robot.commands.DescendWinch;
 import frc.robot.subsystems.Drivetrain;
@@ -74,8 +74,8 @@ public class RobotContainer {
 
     configureButtonBindings();
 
-    drivetrain.setDefaultCommand(new CartesianDrive(drivetrain, () -> driverController.getX(Hand.kLeft),
-        () -> driverController.getY(Hand.kLeft), () -> driverController.getX(Hand.kRight)));
+    drivetrain.setDefaultCommand(new HaloDrive(drivetrain, () -> driverController.getY(Hand.kLeft)
+    , () -> driverController.getX(Hand.kRight)));
     ballIntake.setDefaultCommand(new StopIntake(ballIntake));
     conveyor.setDefaultCommand(new StopConveyor(conveyor));
     launcher.setDefaultCommand(new StopLauncher(launcher));
