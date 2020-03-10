@@ -50,8 +50,8 @@ public class RobotContainer {
   private final BallIntake ballIntake = new BallIntake();
   private final Conveyor conveyor = new Conveyor();
   private final Launcher launcher = new Launcher();
-  private final Camera GoalCamera = new Camera(frc.Constants.CameraConstants.cameraTable1);
-  private final Camera IntakeCamera = new Camera(frc.Constants.CameraConstants.cameraTable2);
+  private final Camera GoalCamera = new Camera(frc.robot.Constants.CameraConstants.cameraTable1);
+  private final Camera IntakeCamera = new Camera(frc.robot.Constants.CameraConstants.cameraTable2);
   private final ColorWheel colorWheel = new ColorWheel();
 
   XboxController driverController = new XboxController(DriverControllerConstants.driverControllerPort);
@@ -135,7 +135,7 @@ public class RobotContainer {
 
     // Launcher Override
     setLauncherVelocityOverrideButton
-        .whileHeld(new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
+        .whileHeld(new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(GoalCamera.getDistanceFromGoal())));
     setLauncherSpeedOverrideButton.whileHeld(new SetLauncherSpeed(launcher,
         () -> map(overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis), -1.0, 1.0, 0.0, 1.0)));
     

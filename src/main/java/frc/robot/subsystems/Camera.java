@@ -34,7 +34,6 @@ public class Camera extends SubsystemBase {
       .getSubTable(CameraConstants.cameraTable);
     
     robotPose = cameraTable.getEntry("targetPose");
-
     validTarget = cameraTable.getEntry("isValid");
     targetArea = cameraTable.getEntry("targetArea");
     cameraPitch = cameraTable.getEntry("targetPitch");
