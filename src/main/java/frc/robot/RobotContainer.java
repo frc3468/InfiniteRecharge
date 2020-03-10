@@ -50,7 +50,8 @@ public class RobotContainer {
   private final BallIntake ballIntake = new BallIntake();
   private final Conveyor conveyor = new Conveyor();
   private final Launcher launcher = new Launcher();
-  private final Camera camera = new Camera();
+  private final Camera GoalCamera = new Camera(frc.Constants.CameraConstants.cameraTable1);
+  private final Camera IntakeCamera = new Camera(frc.Constants.CameraConstants.cameraTable2);
   private final ColorWheel colorWheel = new ColorWheel();
 
   XboxController driverController = new XboxController(DriverControllerConstants.driverControllerPort);
