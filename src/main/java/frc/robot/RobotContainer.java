@@ -29,7 +29,6 @@ import frc.robot.commands.StopIntake;
 import frc.robot.commands.StopLauncher;
 import frc.robot.commands.StopWinchMotor;
 import frc.robot.commands.StowColorWheelArm;
-import frc.robot.commands.AutoFolder.IndexerAuto;
 import frc.robot.commands.RetreatConveyor;
 import frc.robot.commands.ReverseColorWheel;
 import frc.robot.commands.SetLauncherSpeed;
@@ -155,7 +154,7 @@ public class RobotContainer {
     setLauncherVelocityOverrideButton
         .whileHeld(new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
     setLauncherSpeedOverrideButton.whileHeld(new SetLauncherVelocity(launcher,
-        () -> map(overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis), -1.0, 1.0, 0.0, 5000.0)));
+        () -> map(overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis), -1.0, 1.0, 0.0, 3000.0)));
     setLauncherVelocityOverrideButton.whenPressed(new CameraLightOn(camera)).whenReleased(new CameraLightOff(camera));  
     setLauncherSpeedOverrideButton.whenPressed(new CameraLightOn(camera)).whenReleased(new CameraLightOff(camera));  
 
