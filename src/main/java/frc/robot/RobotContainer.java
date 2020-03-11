@@ -15,6 +15,11 @@ import frc.robot.Constants.DriverControllerConstants;
 import frc.robot.Constants.OverrideControllerConstants;
 import frc.robot.commands.AdvanceColorWheel;
 import frc.robot.commands.AdvanceConveyor;
+import frc.robot.commands.AscendHook;
+import frc.robot.commands.AscendWinch;
+import frc.robot.commands.Auto;
+import frc.robot.commands.CameraLightOff;
+import frc.robot.commands.CameraLightOn;
 import frc.robot.commands.IntakeBallIntake;
 import frc.robot.commands.RaiseColorWheelArm;
 import frc.robot.commands.ExhaustBallIntake;
@@ -23,15 +28,19 @@ import frc.robot.commands.StopColorWheel;
 import frc.robot.commands.StopConveyor;
 import frc.robot.commands.StopIntake;
 import frc.robot.commands.StopLauncher;
+import frc.robot.commands.StopWinchMotor;
 import frc.robot.commands.StowColorWheelArm;
 import frc.robot.commands.RetreatConveyor;
 import frc.robot.commands.ReverseColorWheel;
 import frc.robot.commands.SetLauncherSpeed;
 import frc.robot.commands.CartesianDrive;
+import frc.robot.commands.DescendHook;
+import frc.robot.commands.DescendWinch;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.BallIntake;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Launcher;
+import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.ColorWheel;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -54,6 +63,7 @@ public class RobotContainer {
   private final Camera goalCamera = new Camera(CameraConstants.goalCameraName);
   private final Camera intakeCamera = new Camera(CameraConstants.intakeCameraName);
   private final ColorWheel colorWheel = new ColorWheel();
+  private final Lift lift = new Lift();
 
   XboxController driverController = new XboxController(DriverControllerConstants.driverControllerPort);
   Joystick overrideController = new Joystick(OverrideControllerConstants.overrideControllerPort);
@@ -72,6 +82,7 @@ public class RobotContainer {
     conveyor.setDefaultCommand(new StopConveyor(conveyor));
     launcher.setDefaultCommand(new StopLauncher(launcher));
     colorWheel.setDefaultCommand(new StopColorWheel(colorWheel));
+    lift.setDefaultCommand(new StopWinchMotor(lift));
   }
 
   /*
@@ -104,12 +115,18 @@ public class RobotContainer {
         OverrideControllerConstants.advanceCPManipulatorButton);
     JoystickButton reverseColorWheelOverridebutton = new JoystickButton(overrideController, 
         OverrideControllerConstants.reverseCPManipulatorButton);
+    JoystickButton ascendHookOverrideButton = new JoystickButton(overrideController,
+        OverrideControllerConstants.raiseLiftHookButton);
+    JoystickButton ascendWinchOverrideButton = new JoystickButton(overrideController,
+        OverrideControllerConstants.advanceLiftWinchButton);
+    JoystickButton descendWinchOverrideButton = new JoystickButton(overrideController,
+        OverrideControllerConstants.regressLiftWinchButton);    
 
     // Internal Robot Triggers
     Trigger initialConveyorDetector = new Trigger(() -> conveyor.getInitialConveyorSensor());
     Trigger finalConveyorDetector = new Trigger(() -> conveyor.getFinalConveyorSensor());
     Trigger launcherConveyorDetector = new Trigger(() -> conveyor.getLauncherConveyorSensor());
-    Trigger launcherOnTarget = new Trigger(() -> launcher.isOnTarget());
+    Trigger launcherOnTarget = new Trigger(() -> launcher.isOnTargetAverage(7));
 
     // Intake
     intakeButton.and(finalConveyorDetector.or(launcherConveyorDetector).negate())
@@ -124,7 +141,8 @@ public class RobotContainer {
     //    new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(goalCamera.getDistanceFromGoal())));
     launchButton.and(launcherOnTarget).whileActiveContinuous(new AdvanceConveyor(conveyor));
     launchButton.and(launcherOnTarget.negate().and(launcherConveyorDetector.negate()))
-        .whileActiveContinuous(new AdvanceConveyor(conveyor));
+        .whileActiveContinuous(new AdvanceConveyor(conveyor));   
+    launchButton.whenPressed(new CameraLightOn(goalCamera)).whenReleased(new CameraLightOff(goalCamera));     
 
     // Intake Override
     IntakeBallIntakeOverrideButton.whileHeld(new IntakeBallIntake(ballIntake));
@@ -137,17 +155,27 @@ public class RobotContainer {
     // Launcher Override
     setLauncherVelocityOverrideButton
         .whileHeld(new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(goalCamera.getDistanceFromGoal())));
-    setLauncherSpeedOverrideButton.whileHeld(new SetLauncherSpeed(launcher,
-        () -> map(overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis), -1.0, 1.0, 0.0, 1.0)));
-    
+    setLauncherSpeedOverrideButton.whileHeld(new SetLauncherVelocity(launcher,
+        () -> map(overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis), -1.0, 1.0, 0.0, 3000.0)));
+    setLauncherVelocityOverrideButton.whenPressed(new CameraLightOn(goalCamera)).whenReleased(new CameraLightOff(goalCamera));
+    setLauncherSpeedOverrideButton.whenPressed(new CameraLightOn(goalCamera)).whenReleased(new CameraLightOff(goalCamera));
+
     // ColorWheel Override
     raiseColorWheelArmOverrideButton
-        .whenPressed(new RaiseColorWheelArm(colorWheel).withTimeout(0.5))
-        .whenReleased(new StowColorWheelArm(colorWheel).withTimeout(0.5));
+        .whenPressed(new RaiseColorWheelArm(colorWheel).withTimeout(1.5))
+        .whenReleased(new StowColorWheelArm(colorWheel).withTimeout(1.5));
     advanceColorWheelOverridebutton.whileHeld(new AdvanceColorWheel(colorWheel));
     reverseColorWheelOverridebutton.whileHeld(new ReverseColorWheel(colorWheel));
 
-
+    // Lift Override
+    // ascendHookOverrideButton.whenPressed(new AscendHook(lift));
+    // ascendHookOverrideButton.whenReleased(new DescendHook(lift));
+    // ascendWinchOverrideButton.whileActiveContinuous(new AscendWinch(lift));
+    // descendWinchOverrideButton.whileActiveContinuous(new DescendWinch(lift));
+    ascendHookOverrideButton.negate().and(ascendWinchOverrideButton).whileActiveOnce(new AscendHook(lift));
+    ascendHookOverrideButton.negate().and(descendWinchOverrideButton).whileActiveOnce(new DescendHook(lift));
+    ascendHookOverrideButton.and(ascendWinchOverrideButton).whileActiveOnce(new AscendWinch(lift));
+    ascendHookOverrideButton.and(descendWinchOverrideButton).whileActiveOnce(new DescendWinch(lift));
   }
 
   /**
@@ -157,7 +185,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return new Auto(launcher, conveyor, () -> launcher.isOnTargetAverage(7), drivetrain);
   }
 
   private double map(double x, double in_min, double in_max, double out_min, double out_max) {

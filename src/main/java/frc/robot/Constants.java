@@ -75,37 +75,50 @@ public final class Constants {
     public static final class LauncherConstants {
         public static final int leftLaunchMotor = 5;
         public static final int rightLaunchMotor = 6;
-        public static final double proportialPIDConstant = 1.0;
+        public static final double proportialPIDConstant = 0.0002;
         public static final double integralPIDConstant = 0.0;
         public static final double derivativePIDConstant = 0.0;
         public static final double integralPIDZone = 0.0;
-        public static final double feedForwardPIDConstant = 0.0;
+        public static final double leftFeedForwardPIDConstant = 0.000175;
+        public static final double rightFeedForwardPIDConstant = 0.000170;
         public static final double maxPIDOutput = 1.0;
-        public static final double minPIDOutput = -1.0;
-        public static final double velocityPIDTolerance = 10;
+        public static final double minPIDOutput = 0.0;
+        public static final double velocityPIDTolerance = 30;
     }
 
     public static final class CameraConstants {
         public static final String chameleonVisionTableName = "chameleon-vision";
         public static final String goalCameraName = "goal cam";
         public static final String intakeCameraName = "intake cam";
+        public static final int lightRelay = 0;
     }
 
     public static final class ColorWheelConstants {
         public static final int manipulatorMotor = 10;
         public static final int manipulatorArmMotor = 11;
         public static final I2C.Port colorSensorPort = I2C.Port.kOnboard;
-        public static final double manipulatorForwardSpeed = 0.2;
-        public static final double manipulatorReverseSpeed = 0.2;
-        public static final double manipulatorStopSpeed = 0.2;
-        public static final double manipulatorArmForwardSpeed = 0.2;
-        public static final double manipulatorArmReverseSpeed = -0.2;
-        public static final double manipulatorArmStopSpeed = -0.2;
+        public static final double manipulatorForwardSpeed = 0.1;
+        public static final double manipulatorReverseSpeed = -0.1;
+        public static final double manipulatorStopSpeed = 0.0;
+        public static final double manipulatorArmForwardSpeed = 0.6;
+        public static final double manipulatorArmReverseSpeed = -0.3;
+        public static final double manipulatorArmStopSpeed = 0.0;
         public static final Color blueColor = ColorMatch.makeColor(0.143, 0.427, 0.429);
         public static final Color greenColor = ColorMatch.makeColor(0.197, 0.561, 0.240);
         public static final Color redColor = ColorMatch.makeColor(0.561, 0.232, 0.114);
         public static final Color yellowColor = ColorMatch.makeColor(0.361, 0.524, 0.113);
         public static final int colorWheel90DegreePhaseChange = 2; // 2 color changes in 90deg
+    }
+
+    public static final class LiftConstants{
+        public static final int winchMotor = 7;
+        public static final int hookMotor = 12;
+        public static final double winchUpSpeed = 1.0;
+        public static final double winchDownSpeed = -1.0;        
+        public static final double hookUpSpeed = 1.0;
+        public static final double hookDownSpeed = -1.0;
+        public static final int winchCurrentLimit = 60;
+        public static final int canTimeout = 10;
     }
 
 }

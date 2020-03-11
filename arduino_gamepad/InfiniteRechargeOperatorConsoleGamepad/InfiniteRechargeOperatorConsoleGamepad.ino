@@ -10,8 +10,8 @@
 #define LAUNCHER_THROTTLE_PIN A3
 #define LAUNCHER_MANUAL_PIN 15      // No Pullup
 #define LAUNCER_AUTO_PIN 14         // Pullup, Invert
-#define COLOR_WHEEL_RAISE_PIN 10    // No Pullup, Invert
-#define LIFT_HOOK_RAISE_PIN 16      // No Pullup, Invert
+#define COLOR_WHEEL_RAISE_PIN 10    // No Pullup
+#define LIFT_HOOK_RAISE_PIN 16      // No Pullup
 #define COLOR_WHEEL_FORWARD_PIN 3   // Pullup, Invert
 #define COLOR_WHEEL_REVERSE_PIN 2   // Pullup, Invert
 #define LIFT_FORWARD_PIN 5          // Pullup, Invert
@@ -54,8 +54,8 @@ void loop() {
   // Read Button Values
   joystick.setButton(0,  digitalRead(LAUNCHER_MANUAL_PIN));
   joystick.setButton(1,  !digitalRead(LAUNCER_AUTO_PIN));
-  joystick.setButton(2,  !digitalRead(COLOR_WHEEL_RAISE_PIN));
-  joystick.setButton(3,  !digitalRead(LIFT_HOOK_RAISE_PIN));
+  joystick.setButton(2,  digitalRead(COLOR_WHEEL_RAISE_PIN));
+  joystick.setButton(3,  digitalRead(LIFT_HOOK_RAISE_PIN));
   joystick.setButton(4,  !digitalRead(COLOR_WHEEL_FORWARD_PIN));
   joystick.setButton(5,  !digitalRead(COLOR_WHEEL_REVERSE_PIN));
   joystick.setButton(6,  !digitalRead(LIFT_FORWARD_PIN));

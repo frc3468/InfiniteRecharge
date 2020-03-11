@@ -26,6 +26,7 @@ public class Launcher extends SubsystemBase {
   private CANPIDController rightPIDController;
   private CANPIDController leftPIDController;
   private double targetVelocity = 0; 
+  private int rollingAvg = 0;
 
   public Launcher() {
     leftLaunchMotor = new CANSparkMax(LauncherConstants.leftLaunchMotor, MotorType.kBrushless);
@@ -43,16 +44,19 @@ public class Launcher extends SubsystemBase {
     leftPIDController.setI(LauncherConstants.integralPIDConstant);
     leftPIDController.setD(LauncherConstants.derivativePIDConstant);
     leftPIDController.setIZone(LauncherConstants.integralPIDConstant);
-    leftPIDController.setFF(LauncherConstants.feedForwardPIDConstant);
-    leftPIDController.setOutputRange(LauncherConstants.maxPIDOutput, LauncherConstants.minPIDOutput);
+    leftPIDController.setFF(LauncherConstants.leftFeedForwardPIDConstant);
+    leftPIDController.setOutputRange(LauncherConstants.minPIDOutput, LauncherConstants.maxPIDOutput);
 
     rightPIDController.setP(LauncherConstants.proportialPIDConstant);
     rightPIDController.setI(LauncherConstants.integralPIDConstant);
     rightPIDController.setD(LauncherConstants.derivativePIDConstant);
     rightPIDController.setIZone(LauncherConstants.integralPIDConstant);
-    rightPIDController.setFF(LauncherConstants.feedForwardPIDConstant);
-    rightPIDController.setOutputRange(LauncherConstants.maxPIDOutput, LauncherConstants.minPIDOutput);
-    setVelocity(0.0);
+    rightPIDController.setFF(LauncherConstants.rightFeedForwardPIDConstant);
+    rightPIDController.setOutputRange(LauncherConstants.minPIDOutput, LauncherConstants.maxPIDOutput);
+    stop();
+
+    leftLaunchMotor.burnFlash();
+    rightLaunchMotor.burnFlash();
   }  
 
   public void setVelocity(double velocity) {
@@ -63,8 +67,7 @@ public class Launcher extends SubsystemBase {
 
   public void setSpeed(double speed) {
     leftLaunchMotor.set(speed);
-    targetVelocity = leftMotorEncoder.getVelocity();
-    rightPIDController.setReference(targetVelocity, ControlType.kVelocity);
+    rightLaunchMotor.set(speed);
   }
 
   public void stop() {
@@ -85,6 +88,19 @@ public class Launcher extends SubsystemBase {
     return (rightOnTarget && leftOnTarget);
   }
 
+  public boolean isOnTargetAverage(int percent) {
+    if(percent > 10) {
+      percent = 10;
+    } else if(percent < 0) {
+      percent = 0;
+    }
+
+    if(rollingAvg >= percent) {
+      return true;
+    }
+    return false;
+  }
+
   public static double distanceToVelocity(double distance) {
     //TODO tune distance convertion 
     return 0.0;
@@ -92,10 +108,22 @@ public class Launcher extends SubsystemBase {
 
   @Override
   public void periodic() {
+    if (isOnTarget()) {
+      if(rollingAvg < 10) {
+        rollingAvg++;
+      }
+    } else if(rollingAvg > 0) {
+      if(rollingAvg > 0) {
+        rollingAvg--;
+      }
+    }
+
+
     SmartDashboard.putNumber("Left Velocity", leftMotorEncoder.getVelocity());
     SmartDashboard.putNumber("Right Velocity", rightMotorEncoder.getVelocity());
     SmartDashboard.putNumber("Average Velocity", getVelocity());
     SmartDashboard.putBoolean("Launcher On Target", isOnTarget());
+    SmartDashboard.putBoolean("Avg Launcher On Target", isOnTargetAverage(7));
     SmartDashboard.putNumber("Target Velocity", targetVelocity);
     // This method will be called once per scheduler run
   }

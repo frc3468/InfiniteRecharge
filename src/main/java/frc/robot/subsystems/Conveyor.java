@@ -31,7 +31,9 @@ public class Conveyor extends SubsystemBase {
     finalConveyorSensor = new DigitalInput(ConveyorConstants.finalConveyorSensor);
     launcherConveyorSensor = new DigitalInput(ConveyorConstants.launcherConveyorSensor);
 
-    conveyorMotor.setInverted(true);
+   conveyorMotor.setInverted(true);
+
+   conveyorMotor.burnFlash();
   }
 
   public void advance() {
