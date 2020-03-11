@@ -87,8 +87,8 @@ public final class Constants {
 
     public static final class CameraConstants {
         public static final String chameleonVisionTableName = "chameleon-vision";
-        public static final String cameraTable1 = "goal cam";
-        public static final String cameraTable2 = "intake cam";
+        public static final String goalCameraName = "goal cam";
+        public static final String intakeCameraName = "intake cam";
     }
 
     public static final class ColorWheelConstants {

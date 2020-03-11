@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import frc.robot.Constants.CameraConstants;
 import frc.robot.Constants.DriverControllerConstants;
 import frc.robot.Constants.OverrideControllerConstants;
 import frc.robot.commands.AdvanceColorWheel;
@@ -50,8 +51,8 @@ public class RobotContainer {
   private final BallIntake ballIntake = new BallIntake();
   private final Conveyor conveyor = new Conveyor();
   private final Launcher launcher = new Launcher();
-  private final Camera GoalCamera = new Camera(frc.robot.Constants.CameraConstants.cameraTable1);
-  private final Camera IntakeCamera = new Camera(frc.robot.Constants.CameraConstants.cameraTable2);
+  private final Camera goalCamera = new Camera(CameraConstants.goalCameraName);
+  private final Camera intakeCamera = new Camera(CameraConstants.intakeCameraName);
   private final ColorWheel colorWheel = new ColorWheel();
 
   XboxController driverController = new XboxController(DriverControllerConstants.driverControllerPort);
@@ -120,7 +121,7 @@ public class RobotContainer {
 
     // Launcher
     //launchButton.or(setLauncherVelocityOverrideButton).whileActiveContinuous(
-    //    new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(camera.getDistanceFromGoal())));
+    //    new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(goalCamera.getDistanceFromGoal())));
     launchButton.and(launcherOnTarget).whileActiveContinuous(new AdvanceConveyor(conveyor));
     launchButton.and(launcherOnTarget.negate().and(launcherConveyorDetector.negate()))
         .whileActiveContinuous(new AdvanceConveyor(conveyor));
@@ -135,7 +136,7 @@ public class RobotContainer {
 
     // Launcher Override
     setLauncherVelocityOverrideButton
-        .whileHeld(new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(GoalCamera.getDistanceFromGoal())));
+        .whileHeld(new SetLauncherVelocity(launcher, () -> Launcher.distanceToVelocity(goalCamera.getDistanceFromGoal())));
     setLauncherSpeedOverrideButton.whileHeld(new SetLauncherSpeed(launcher,
         () -> map(overrideController.getRawAxis(OverrideControllerConstants.launcherSpeedAxis), -1.0, 1.0, 0.0, 1.0)));
     

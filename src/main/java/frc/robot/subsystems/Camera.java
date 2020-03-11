@@ -28,10 +28,10 @@ public class Camera extends SubsystemBase {
   /**
    * Creates a new ExampleSubsystem.
    */
-  public Camera(String cameraTable) {
+  public Camera(String cameraName) {
     cameraTable = NetworkTableInstance.getDefault()
       .getTable(CameraConstants.chameleonVisionTableName)
-      .getSubTable(CameraConstants.cameraTable);
+      .getSubTable(cameraName);
     
     robotPose = cameraTable.getEntry("targetPose");
     validTarget = cameraTable.getEntry("isValid");
