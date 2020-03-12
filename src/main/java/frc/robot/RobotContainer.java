@@ -185,7 +185,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new Auto(launcher, conveyor, () -> launcher.isOnTargetAverage(7), drivetrain);
+    return new Auto(launcher, conveyor, () -> launcher.isOnTargetAverage(7), drivetrain, goalCamera);
   }
 
   private double map(double x, double in_min, double in_max, double out_min, double out_max) {
