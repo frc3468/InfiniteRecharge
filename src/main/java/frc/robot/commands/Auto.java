@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.AutoFolder.DoNothing;
 import frc.robot.commands.AutoFolder.DriveForwardAuto;
 import frc.robot.commands.AutoFolder.LaunchingAuto;
+import frc.robot.commands.AutoFolder.RemoveXOffset;
+import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Launcher;
@@ -25,10 +27,10 @@ public class Auto extends SequentialCommandGroup {
   /**
    * Creates a new Auto.
    */
-  public Auto(Launcher launcher, Conveyor conveyor, BooleanSupplier bool, Drivetrain drivetrain) {
+  public Auto(Launcher launcher, Conveyor conveyor, BooleanSupplier bool, Drivetrain drivetrain,Camera camera) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     // 
-    super(new LaunchingAuto(launcher, conveyor, bool).withTimeout(8), new DoNothing(drivetrain).withTimeout(0.5), new DriveForwardAuto(drivetrain).withTimeout(0.6));
+    super(new RemoveXOffset(camera, drivetrain),new LaunchingAuto(launcher, conveyor, bool).withTimeout(8), new DoNothing(drivetrain).withTimeout(0.5), new DriveForwardAuto(drivetrain).withTimeout(0.6));
   }
 }
