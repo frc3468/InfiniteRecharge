@@ -18,35 +18,42 @@ import frc.robot.Constants.CameraConstants;
 
 
 public class Camera extends SubsystemBase {
-  private NetworkTable cameraTable;
-
+  private NetworkTable firstcameraTable;
+  private NetworkTable secoundcameraTable;
   private NetworkTableEntry robotPose;
 
   private NetworkTableEntry validTarget;
-  private NetworkTableEntry targetArea;
-  private NetworkTableEntry cameraPitch; 
-  private NetworkTableEntry cameraYaw;
+  // private NetworkTableEntry targetArea;
+  // private NetworkTableEntry cameraPitch; 
+  // private NetworkTableEntry cameraYaw;
 
   private Relay light;
 
   /**
    * Creates a new ExampleSubsystem.
    */
-  public Camera(String cameraName) {
+  public Camera() {
+
 
     light = new Relay(CameraConstants.lightRelay);
 
-    cameraTable = NetworkTableInstance.getDefault()
+    firstcameraTable = NetworkTableInstance.getDefault()
       .getTable(CameraConstants.chameleonVisionTableName)
-      .getSubTable(cameraName);
+      .getSubTable(CameraConstants.goalCameraName);
     
-    robotPose = cameraTable.getEntry("targetPose");
-    validTarget = cameraTable.getEntry("isValid");
-    targetArea = cameraTable.getEntry("targetArea");
-    cameraPitch = cameraTable.getEntry("targetPitch");
-    cameraYaw = cameraTable.getEntry("targetYaw");
+    secoundcameraTable = NetworkTableInstance.getDefault()
+      .getTable(CameraConstants.chameleonVisionTableName)
+      .getSubTable(CameraConstants.intakeCameraName);
+    
+    robotPose = firstcameraTable.getEntry("targetPose");
+    validTarget = firstcameraTable.getEntry("isValid");
+    // targetArea = firstcameraTable.getEntry("targetArea");
+    // cameraPitch = firstcameraTable.getEntry("targetPitch");
+    // cameraYaw = firstcameraTable.getEntry("targetYaw");
 
-    cameraTable.getEntry("driver_mode").setBoolean(true);
+    firstcameraTable.getEntry("driver_mode").setBoolean(true);
+    secoundcameraTable.getEntry("driver_mode").setBoolean(true);
+
   }
 
   public double getDistanceFromGoal(){

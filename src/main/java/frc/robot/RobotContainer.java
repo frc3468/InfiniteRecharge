@@ -10,7 +10,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import frc.robot.Constants.CameraConstants;
 import frc.robot.Constants.DriverControllerConstants;
 import frc.robot.Constants.OverrideControllerConstants;
 import frc.robot.commands.AdvanceColorWheel;
@@ -60,8 +59,7 @@ public class RobotContainer {
   private final BallIntake ballIntake = new BallIntake();
   private final Conveyor conveyor = new Conveyor();
   private final Launcher launcher = new Launcher();
-  private final Camera goalCamera = new Camera(CameraConstants.goalCameraName);
-  private final Camera intakeCamera = new Camera(CameraConstants.intakeCameraName);
+  private final Camera goalCamera = new Camera();
   private final ColorWheel colorWheel = new ColorWheel();
   private final Lift lift = new Lift();
 
