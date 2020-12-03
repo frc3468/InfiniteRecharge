@@ -5,20 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.ColorWheel;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.ColorWheel;
 
-public class RetreatConveyor extends CommandBase {
-  private final Conveyor conveyor;
+public class StowColorWheelArm extends CommandBase {
+  private ColorWheel colorWheel;
   /**
-   * Creates a new RetreatConveyor.
+   * Creates a new StowColorWheelArm.
    */
-  public RetreatConveyor(Conveyor subsystem) {
-    conveyor = subsystem;
-    addRequirements(conveyor);
+  public StowColorWheelArm(ColorWheel subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    colorWheel = subsystem;
+    addRequirements(colorWheel);
   }
 
   // Called when the command is initially scheduled.
@@ -29,13 +29,13 @@ public class RetreatConveyor extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    conveyor.retreat();
+    colorWheel.stowArm();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    conveyor.stop();
+    colorWheel.stopArm();
   }
 
   // Returns true when the command should end.

@@ -5,19 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Lift;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Launcher;
+import frc.robot.subsystems.Lift;
 
-public class StopLauncher extends CommandBase {
-  private final Launcher launcher;
+public class DescendWinch extends CommandBase {
+  private final Lift lift; 
   /**
-   * Creates a new StopLauncher.
+   * Creates a new DescendWinch.
    */
-  public StopLauncher(Launcher subsystem) {
-    launcher = subsystem;
-    addRequirements(launcher);
+  public DescendWinch(Lift subsystem) {
+    lift = subsystem;
+    addRequirements(lift);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -29,12 +29,13 @@ public class StopLauncher extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    launcher.stop();
+    lift.pullDownWinch();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    lift.stopWinchMotor();
   }
 
   // Returns true when the command should end.

@@ -5,41 +5,42 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Lift;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Camera;
+import frc.robot.subsystems.Lift;
 
-public class CameraLightOff extends CommandBase {
-  private Camera camera;
+public class AscendHook extends CommandBase {
+  private final Lift lift;
   /**
-   * Creates a new CameraLightOff.
+   * Creates a new AscendHook.
    */
-  public CameraLightOff(Camera subsystem) {
-    camera = subsystem;
-    addRequirements(camera);
+  public AscendHook(Lift subsystem) {
+    lift = subsystem;
+    addRequirements(lift);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    camera.lightOff();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    lift.liftUpHook();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    lift.stopHookMotor();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return lift.isForwardLimitSwitch();
   }
 }

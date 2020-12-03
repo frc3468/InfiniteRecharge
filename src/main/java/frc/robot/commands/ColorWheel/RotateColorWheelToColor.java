@@ -5,20 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.ColorWheel;
 
+import java.util.function.Supplier;
+
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Lift;
+import frc.robot.subsystems.ColorWheel;
 
-public class DescendHook extends CommandBase {
-  private final Lift lift;
+public class RotateColorWheelToColor extends CommandBase {
+  private ColorWheel colorWheel;
+  private Supplier<Color> currentColor;
+  private Supplier<Color> targetColor;
   /**
-   * Creates a new DescendHook.
+   * Creates a new RotateColorWheelToColor.
    */
-  public DescendHook(Lift subsystem) {
-    lift = subsystem;
-    addRequirements(lift);
+  public RotateColorWheelToColor(ColorWheel subsystem, Supplier<Color> currentColorSource, Supplier<Color> targetColorSource) {
     // Use addRequirements() here to declare subsystem dependencies.
+    colorWheel = subsystem;
+    currentColor = currentColorSource;
+    targetColor = targetColorSource;
   }
 
   // Called when the command is initially scheduled.
@@ -29,18 +35,24 @@ public class DescendHook extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    lift.pullDownHook();
+    if(targetColor.get() != null) {
+      if(currentColor.get() != targetColor.get()) {
+        colorWheel.advance();
+      }
+    } else {
+      colorWheel.stop();
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    lift.stopHookMotor();
+    colorWheel.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return lift.isReverseLimitSwitch();
+    return targetColor.get() != null && targetColor.get() == currentColor.get();
   }
 }

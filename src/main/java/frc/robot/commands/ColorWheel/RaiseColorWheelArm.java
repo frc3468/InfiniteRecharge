@@ -5,23 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.ColorWheel;
 
-import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Launcher;
+import frc.robot.subsystems.ColorWheel;
 
-public class SetLauncherVelocity extends CommandBase {
-  private Launcher launcher;
-  private DoubleSupplier velocity;
+public class RaiseColorWheelArm extends CommandBase {
+  private ColorWheel colorWheel;
   /**
-   * Creates a new SetLauncherVelocity.
+   * Creates a new RaiseColorWheelArm.
    */
-  public SetLauncherVelocity(Launcher subsystem, DoubleSupplier velocitySource) {
-    launcher = subsystem; 
-    velocity = velocitySource;
-    addRequirements(launcher);
+  public RaiseColorWheelArm(ColorWheel subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    colorWheel = subsystem;
+    addRequirements(colorWheel);
   }
 
   // Called when the command is initially scheduled.
@@ -32,13 +29,13 @@ public class SetLauncherVelocity extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    launcher.setVelocity(velocity.getAsDouble());
+    colorWheel.raiseArm();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    launcher.stop();
+    colorWheel.stopArm();
   }
 
   // Returns true when the command should end.

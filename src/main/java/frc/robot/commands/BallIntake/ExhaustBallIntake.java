@@ -5,59 +5,42 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.BallIntake;
 
-import java.util.function.Supplier;
-
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ColorWheel;
+import frc.robot.subsystems.BallIntake;
 
-public class RotateColorWheel extends CommandBase {
-  private ColorWheel colorWheel;
-  private Supplier<Color> currentColor;
-  private Color lastColor;
-  private int targetEighthTurns;
-  private int completedEighthTurns;
-
+public class ExhaustBallIntake extends CommandBase {
+  private BallIntake ballIntake;
   /**
-   * Creates a new RotateColorWheel.
+   * Creates a new ExhaustBallIntake.
    */
-  public RotateColorWheel(ColorWheel subsystem, Supplier<Color> currentColorSource, int eighthTurns) {
+  public ExhaustBallIntake(BallIntake subsystem) {
+    ballIntake = subsystem;
+    addRequirements(ballIntake);
     // Use addRequirements() here to declare subsystem dependencies.
-    colorWheel = subsystem;
-    currentColor = currentColorSource;
-    targetEighthTurns = eighthTurns;
-    addRequirements(colorWheel);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    lastColor = currentColor.get();
-    completedEighthTurns = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Color currentColor = this.currentColor.get();
-    if(currentColor != lastColor) {
-      lastColor = currentColor;
-      completedEighthTurns++;
-    }
-    colorWheel.advance();
+    ballIntake.exhaust();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    colorWheel.stop();
+    ballIntake.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return completedEighthTurns >= targetEighthTurns;
+    return false;
   }
 }

@@ -5,19 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.BallIntake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Lift;;
+import frc.robot.subsystems.BallIntake;
 
-public class AscendHook extends CommandBase {
-  private final Lift lift;
+public class StopIntake extends CommandBase {
+  private BallIntake ballIntake; 
   /**
-   * Creates a new AscendHook.
+   * Creates a new StopIntake.
    */
-  public AscendHook(Lift subsystem) {
-    lift = subsystem;
-    addRequirements(lift);
+  public StopIntake(BallIntake subsystem) {
+    ballIntake = subsystem;
+    addRequirements(ballIntake);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -29,18 +29,17 @@ public class AscendHook extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    lift.liftUpHook();
+    ballIntake.stop();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    lift.stopHookMotor();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return lift.isForwardLimitSwitch();
+    return false;
   }
 }

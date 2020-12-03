@@ -5,31 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Camera;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Lift;
+import frc.robot.subsystems.Camera;
 
-public class StopWinchMotor extends CommandBase {
-  private final Lift lift; 
+public class CameraLightOn extends CommandBase {
+  private Camera camera;
   /**
-   * Creates a new StopWinchMotor.
+   * Creates a new CameraLightOn.
    */
-  public StopWinchMotor(Lift subsystem) {
-    lift = subsystem;
-    addRequirements(lift);
+  public CameraLightOn(Camera subsystem) {
+    camera = subsystem;
+    addRequirements(camera);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    camera.lightOn();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    lift.stopWinchMotor();
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +40,6 @@ public class StopWinchMotor extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

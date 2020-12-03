@@ -5,20 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.ColorWheel;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BallIntake;
+import frc.robot.subsystems.ColorWheel;
 
-public class StopIntake extends CommandBase {
-  private BallIntake ballIntake; 
+public class StopColorWheel extends CommandBase {
+  private ColorWheel colorWheel;
   /**
-   * Creates a new StopIntake.
+   * Creates a new StopColorWheel.
    */
-  public StopIntake(BallIntake subsystem) {
-    ballIntake = subsystem;
-    addRequirements(ballIntake);
+  public StopColorWheel(ColorWheel subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    colorWheel = subsystem;
+    addRequirements(colorWheel);
   }
 
   // Called when the command is initially scheduled.
@@ -29,7 +29,8 @@ public class StopIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ballIntake.stop();
+    colorWheel.stop();
+    colorWheel.stopArm();
   }
 
   // Called once the command ends or is interrupted.

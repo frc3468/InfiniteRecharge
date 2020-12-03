@@ -5,42 +5,41 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Camera;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ColorWheel;
+import frc.robot.subsystems.Camera;
 
-public class StowColorWheelArm extends CommandBase {
-  private ColorWheel colorWheel;
+public class CameraLightOff extends CommandBase {
+  private Camera camera;
   /**
-   * Creates a new StowColorWheelArm.
+   * Creates a new CameraLightOff.
    */
-  public StowColorWheelArm(ColorWheel subsystem) {
+  public CameraLightOff(Camera subsystem) {
+    camera = subsystem;
+    addRequirements(camera);
     // Use addRequirements() here to declare subsystem dependencies.
-    colorWheel = subsystem;
-    addRequirements(colorWheel);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    camera.lightOff();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    colorWheel.stowArm();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    colorWheel.stopArm();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

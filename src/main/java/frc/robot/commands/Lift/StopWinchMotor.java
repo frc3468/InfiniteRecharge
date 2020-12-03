@@ -5,20 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Lift;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ColorWheel;
+import frc.robot.subsystems.Lift;
 
-public class StopColorWheel extends CommandBase {
-  private ColorWheel colorWheel;
+public class StopWinchMotor extends CommandBase {
+  private final Lift lift; 
   /**
-   * Creates a new StopColorWheel.
+   * Creates a new StopWinchMotor.
    */
-  public StopColorWheel(ColorWheel subsystem) {
+  public StopWinchMotor(Lift subsystem) {
+    lift = subsystem;
+    addRequirements(lift);
     // Use addRequirements() here to declare subsystem dependencies.
-    colorWheel = subsystem;
-    addRequirements(colorWheel);
   }
 
   // Called when the command is initially scheduled.
@@ -29,8 +29,7 @@ public class StopColorWheel extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    colorWheel.stop();
-    colorWheel.stopArm();
+    lift.stopWinchMotor();
   }
 
   // Called once the command ends or is interrupted.
