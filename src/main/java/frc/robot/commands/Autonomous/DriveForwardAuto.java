@@ -5,19 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.AutoFolder;
+package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Launcher;
+import frc.robot.subsystems.Drivetrain;
 
-public class AutoLauncher extends CommandBase {
-  private Launcher launcher;
+public class DriveForwardAuto extends CommandBase {
+  private Drivetrain drivetrain;
   /**
-   * Creates a new AutoLauncher.
+   * Creates a new DriveForwardAuto.
    */
-  public AutoLauncher(Launcher subsystem) {
-    launcher = subsystem;
-    addRequirements(launcher);
+  public DriveForwardAuto(Drivetrain subsystem) {
+    drivetrain = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -29,13 +28,13 @@ public class AutoLauncher extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    launcher.setVelocity(1550);
+    drivetrain.cartesianDrive(0.0, -0.75, 0.0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    launcher.setVelocity(0);
+    drivetrain.cartesianDrive(0.0, 0.0, 0.0);
   }
 
   // Returns true when the command should end.

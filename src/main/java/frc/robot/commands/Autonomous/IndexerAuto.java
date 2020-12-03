@@ -5,18 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.AutoFolder;
+package frc.robot.commands.Autonomous;
+
+import java.util.function.BooleanSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Conveyor;
 
-public class DriveForwardAuto extends CommandBase {
-  private Drivetrain drivetrain;
+public class IndexerAuto extends CommandBase {
+  private Conveyor conveyor;
+  private BooleanSupplier targetAverage;
   /**
-   * Creates a new DriveForwardAuto.
+   * Creates a new IndexerAuto.
    */
-  public DriveForwardAuto(Drivetrain subsystem) {
-    drivetrain = subsystem;
+  public IndexerAuto(Conveyor subsystem, BooleanSupplier bool) {
+    conveyor = subsystem;
+    targetAverage = bool;
+    addRequirements(conveyor);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -28,13 +33,14 @@ public class DriveForwardAuto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivetrain.cartesianDrive(0.0, -0.75, 0.0);
+    if (targetAverage.getAsBoolean() == true) {
+      conveyor.advance();
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    drivetrain.cartesianDrive(0.0, 0.0, 0.0);
   }
 
   // Returns true when the command should end.

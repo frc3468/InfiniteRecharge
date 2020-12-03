@@ -5,14 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.AutoFolder;
+package frc.robot.commands.Autonomous;
 
 import java.util.function.BooleanSupplier;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.AutoFolder.DoNothing;
-import frc.robot.commands.AutoFolder.DriveForwardAuto;
-import frc.robot.commands.AutoFolder.LaunchingAuto;
+import frc.robot.commands.Autonomous.DoNothing;
+import frc.robot.commands.Autonomous.DriveForwardAuto;
+import frc.robot.commands.Autonomous.LaunchingAuto;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Launcher;

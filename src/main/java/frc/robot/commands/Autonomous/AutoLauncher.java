@@ -5,23 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.AutoFolder;
-
-import java.util.function.BooleanSupplier;
+package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.Launcher;
 
-public class IndexerAuto extends CommandBase {
-  private Conveyor conveyor;
-  private BooleanSupplier targetAverage;
+public class AutoLauncher extends CommandBase {
+  private Launcher launcher;
   /**
-   * Creates a new IndexerAuto.
+   * Creates a new AutoLauncher.
    */
-  public IndexerAuto(Conveyor subsystem, BooleanSupplier bool) {
-    conveyor = subsystem;
-    targetAverage = bool;
-    addRequirements(conveyor);
+  public AutoLauncher(Launcher subsystem) {
+    launcher = subsystem;
+    addRequirements(launcher);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -33,14 +29,13 @@ public class IndexerAuto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (targetAverage.getAsBoolean() == true) {
-      conveyor.advance();
-    }
+    launcher.setVelocity(1550);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    launcher.setVelocity(0);
   }
 
   // Returns true when the command should end.

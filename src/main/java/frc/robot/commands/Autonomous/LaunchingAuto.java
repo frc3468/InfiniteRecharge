@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.AutoFolder;
+package frc.robot.commands.Autonomous;
 
 import java.util.function.BooleanSupplier;
 
